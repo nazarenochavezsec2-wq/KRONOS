@@ -1,9 +1,10 @@
 </main>
-<footer class="bg-light text-center py-3 mt-5"> 
-    <div class="container"> 
-        <p class="mb-0"> 
+<footer class="admin-footer"> 
+    <div class="admin-footer-inner"> 
+        <span class="admin-footer-brand">HIVE_ARCHIVE</span> 
+        <span class="admin-footer-text"> 
             Panel de administración del sitio web 
-        </p> 
+        </span> 
     </div> 
 </footer> 
 
