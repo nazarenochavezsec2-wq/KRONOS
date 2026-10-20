@@ -1,0 +1,238 @@
+/* HIVE ARCHIVE — ADMIN LOGIN */
+
+:root {
+    --admin-bg: #f1f1f1;
+    --admin-white: #ffffff;
+    --admin-black: #111111;
+    --admin-muted: #686868;
+    --admin-border: #d6d6d6;
+    --admin-accent: #ff2200;
+}
+
+body.admin-login {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--admin-bg);
+    color: var(--admin-black);
+    font-family: 'Syne', sans-serif;
+}
+
+/* Cabecera administrativa */
+
+.admin-topbar {
+    background: var(--admin-black);
+    color: white;
+    border-bottom: 3px solid var(--admin-accent);
+}
+
+.admin-topbar-inner {
+    max-width: 1400px;
+    margin: auto;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-brand {
+    color: white;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.admin-brand:hover {
+    color: white;
+}
+
+.admin-label {
+    font-family: 'Space Mono', monospace;
+    color: #c6c6c6;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+}
+
+/* Contenedor */
+
+.admin-login-main {
+    min-height: calc(100vh - 73px);
+    padding: 55px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-login-card {
+    width: 100%;
+    max-width: 430px;
+    background: var(--admin-white);
+    border: 1px solid var(--admin-border);
+    border-radius: 3px;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.admin-card-header {
+    padding: 30px 32px 24px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.admin-eyebrow {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--admin-accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.admin-card-header h1 {
+    margin: 0 0 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.admin-card-header p {
+    margin: 0;
+    color: var(--admin-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* Formulario */
+
+.admin-card-body {
+    padding: 28px 32px 32px;
+}
+
+.admin-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.admin-form-control {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: white;
+    color: var(--admin-black);
+    font: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-form-control::placeholder {
+    color: #999999;
+}
+
+.admin-form-control:focus {
+    outline: none;
+    border-color: var(--admin-black);
+    box-shadow: 0 0 0 3px rgba(255, 34, 0, 0.10);
+}
+
+.admin-form-group {
+    margin-bottom: 22px;
+}
+
+/* Botón de acceso */
+
+.admin-submit {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 18px;
+    border: 1px solid var(--admin-black);
+    border-radius: 2px;
+    background: var(--admin-black);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.admin-submit:hover {
+    background: var(--admin-accent);
+    border-color: var(--admin-accent);
+}
+
+.admin-submit:focus-visible {
+    outline: 3px solid var(--admin-accent);
+    outline-offset: 3px;
+}
+
+/* Mensajes y pie */
+
+.admin-error {
+    margin-bottom: 22px;
+    padding: 13px 15px;
+    border: 1px solid #e7b7ae;
+    border-left: 4px solid var(--admin-accent);
+    background: #fff4f1;
+    color: #842414;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.admin-card-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #e5e5e5;
+    background: #fafafa;
+    color: var(--admin-muted);
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4px;
+}
+
+/* Enlace para volver a la tienda */
+
+.admin-back {
+    display: inline-block;
+    margin-top: 25px;
+    color: #555555;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+.admin-back:hover {
+    color: var(--admin-accent);
+}
+
+@media (max-width: 576px) {
+    .admin-topbar-inner {
+        padding: 18px 20px;
+    }
+
+    .admin-login-main {
+        padding: 35px 18px;
+        align-items: flex-start;
+    }
+
+    .admin-card-header {
+        padding: 25px 22px 20px;
+    }
+
+    .admin-card-header h1 {
+        font-size: 1.7rem;
+    }
+
+    .admin-card-body {
+        padding: 24px 22px;
+    }
+}

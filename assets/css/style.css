@@ -72,6 +72,16 @@ h1, h2, h3, h4, .brutal-logo, .brutal-add-btn, .f-btn {
     align-items: center;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-actions a {
+    text-decoration: none;
+}
+
 .brutal-logo {
     font-size: 1.2rem;
     font-weight: 700;

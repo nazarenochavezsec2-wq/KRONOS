@@ -29,76 +29,122 @@
     } 
 ?> 
 
-<!DOCTYPE html> 
-<html lang="es"> 
-<head> 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8"> 
+    <title>Acceso administrativo | HIVE ARCHIVE</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" > 
+    <!-- Tipografías de la tienda -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+          rel="stylesheet">
 
-<title>Iniciar sesión</title> 
+    <!-- Bootstrap: utilizado para el mensaje de error -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
-<!-- Bootstrap CSS --> 
-<link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-> 
-</head> 
+    <!-- Estilos exclusivos del login -->
+    <link rel="stylesheet" href="../assets/css/login.css">
 
-<body> 
-    <main class="container py-5"> 
-        <div class="row justify-content-center"> 
-            <div class="col-12 col-md-6 col-lg-4"> 
-    
-                <div class="card"> 
-                    <div class="card-header"> 
-                        Iniciar sesión 
-                    </div> 
-                    <div class="card-body"> 
-                        <?php if ($mensajeError != "") { ?> 
- 
-                            <div class="alert alert-danger" role="alert"> 
-                                <?php echo $mensajeError; ?> 
-                            </div> 
-                        
-                        <?php } ?> 
-                        <form action="" method="post"> 
-                            <div class="mb-3"> 
-                                <label for="usuario" class="form-label"> Usuario </label> 
-                            
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    name="usuario" 
-                                    id="usuario" 
-                                    placeholder="Ingrese su usuario" 
-                                    autocomplete="username" 
-                                    required 
-                                > 
-                            </div>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
 
-                            <div class="mb-3"> 
-                                <label for="password" class="form-label"> Contraseña </label> 
-                            
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña" 
-                                autocomplete="current-password" required > 
-                            </div> 
+<body class="admin-login">
 
-                            <button 
-                            type="submit" 
-                            class="btn btn-primary w-100" 
-                            > 
-                            Entrar 
-                            </button>
-                        </form> 
-                    </div> 
+    <header class="brutal-header">
+        <div class="nav-wrapper">
+            <a href="../index.html" class="brutal-logo">HIVE_ARCHIVE</a>
+        </div>
+    </header>
+
+    <main class="admin-login-main">
+        <div>
+            <section class="admin-login-card">
+
+                <div class="admin-card-header">
+                    <span class="admin-eyebrow">
+                        /// CONTROL PANEL
+                    </span>
+
+                    <h1>Iniciar sesión</h1>
+
+                    <p>
+                        Ingresá tus credenciales para administrar
+                        la tienda HIVE ARCHIVE.
+                    </p>
                 </div>
-            </div> 
 
-        </div> 
+                <div class="admin-card-body">
+
+                    <?php if ($mensajeError !== "") { ?>
+                        <div class="admin-error" role="alert">
+                            <?php echo htmlspecialchars(
+                                $mensajeError,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ); ?>
+                        </div>
+                    <?php } ?>
+
+                    <form action="" method="post">
+
+                        <div class="admin-form-group">
+                            <label for="usuario" class="admin-form-label">
+                                Usuario
+                            </label>
+
+                            <input
+                                type="text"
+                                class="admin-form-control"
+                                name="usuario"
+                                id="usuario"
+                                placeholder="Nombre de usuario"
+                                autocomplete="username"
+                                required
+                                autofocus
+                            >
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label for="password" class="admin-form-label">
+                                Contraseña
+                            </label>
+
+                            <input
+                                type="password"
+                                class="admin-form-control"
+                                name="password"
+                                id="password"
+                                placeholder="Ingresá tu contraseña"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="admin-submit">
+                            ACCEDER AL PANEL →
+                        </button>
+
+                    </form>
+                </div>
+
+                <footer class="admin-card-footer">
+                    ACCESO RESTRINGIDO · HIVE ARCHIVE
+                </footer>
+
+            </section>
+
+            <div class="text-center">
+                <a href="../index.html" class="admin-back">
+                    ← VOLVER A LA TIENDA
+                </a>
+            </div>
+        </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" ></script> 
-</body> 
+</body>
 </html>
