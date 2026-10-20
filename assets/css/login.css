@@ -1,238 +1,252 @@
-/* HIVE ARCHIVE — ADMIN LOGIN */
+/* ==========================================================
+   LOGIN ADMINISTRATIVO · HIVE ARCHIVE
+   Hereda las variables de style.css (:root):
+   --bg-main, --bg-alt, --text-main, --text-muted,
+   --border-color, --accent, --transition
+   ========================================================== */
 
+/* Fallback por si login.css se carga sin style.css */
 :root {
-    --admin-bg: #f1f1f1;
-    --admin-white: #ffffff;
-    --admin-black: #111111;
-    --admin-muted: #686868;
-    --admin-border: #d6d6d6;
-    --admin-accent: #ff2200;
+    --bg-main: #ffffff;
+    --bg-alt: #f4f4f4;
+    --text-main: #000000;
+    --text-muted: #666666;
+    --border-color: #000000;
+    --accent: #ff2200;
+    --transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
+/* ---------- Estructura de la página ---------- */
 body.admin-login {
     min-height: 100vh;
-    margin: 0;
-    background: var(--admin-bg);
-    color: var(--admin-black);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-alt);
+    /* Trama de cuadrícula sutil, en línea con el look editorial */
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--text-main);
     font-family: 'Syne', sans-serif;
 }
 
-/* Cabecera administrativa */
-
-.admin-topbar {
-    background: var(--admin-black);
-    color: white;
-    border-bottom: 3px solid var(--admin-accent);
-}
-
-.admin-topbar-inner {
-    max-width: 1400px;
-    margin: auto;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.admin-brand {
-    color: white;
-    text-decoration: none;
-    font-family: 'Space Mono', monospace;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
-
-.admin-brand:hover {
-    color: white;
-}
-
-.admin-label {
-    font-family: 'Space Mono', monospace;
-    color: #c6c6c6;
-    font-size: 0.72rem;
-    letter-spacing: 1px;
-}
-
-/* Contenedor */
-
 .admin-login-main {
-    min-height: calc(100vh - 73px);
-    padding: 55px 20px;
+    flex: 1;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
 }
 
-.admin-login-card {
+.admin-login-main > div {
     width: 100%;
-    max-width: 430px;
-    background: var(--admin-white);
-    border: 1px solid var(--admin-border);
-    border-radius: 3px;
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.06);
-    overflow: hidden;
+    max-width: 460px;
 }
 
+/* ---------- Tarjeta ---------- */
+.admin-login-card {
+    background: var(--bg-main);
+    border: 2px solid var(--border-color);
+    box-shadow: 8px 8px 0 0 var(--border-color);
+    margin-bottom: 30px;
+}
+
+/* Cabecera */
 .admin-card-header {
-    padding: 30px 32px 24px;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 28px 32px;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .admin-eyebrow {
     display: block;
     margin-bottom: 14px;
-    color: var(--admin-accent);
     font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 1px;
+    color: var(--accent);
 }
 
 .admin-card-header h1 {
-    margin: 0 0 10px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
+    line-height: 1;
     letter-spacing: -1px;
+    text-transform: uppercase;
+    margin: 0 0 14px;
 }
 
 .admin-card-header p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-muted);
     margin: 0;
-    color: var(--admin-muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
 }
 
-/* Formulario */
-
+/* Cuerpo */
 .admin-card-body {
-    padding: 28px 32px 32px;
+    padding: 32px;
+}
+
+/* ---------- Mensaje de error ---------- */
+.admin-error {
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    border: 2px solid var(--accent);
+    border-left-width: 8px;
+    background: var(--bg-main);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* ---------- Formulario ---------- */
+.admin-form-group {
+    margin-bottom: 22px;
 }
 
 .admin-form-label {
     display: block;
     margin-bottom: 8px;
-    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
     font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
 }
 
 .admin-form-control {
     display: block;
     width: 100%;
-    min-height: 48px;
-    padding: 12px 14px;
-    box-sizing: border-box;
-    border: 1px solid #cfcfcf;
-    border-radius: 2px;
-    background: white;
-    color: var(--admin-black);
-    font: inherit;
-    font-size: 0.9rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 14px 16px;
+    background: var(--bg-main);
+    border: 2px solid var(--border-color);
+    border-radius: 0;
+    color: var(--text-main);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .admin-form-control::placeholder {
-    color: #999999;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.admin-form-control:hover {
+    background: var(--bg-alt);
 }
 
 .admin-form-control:focus {
     outline: none;
-    border-color: var(--admin-black);
-    box-shadow: 0 0 0 3px rgba(255, 34, 0, 0.10);
+    background: var(--bg-main);
+    box-shadow: 4px 4px 0 0 var(--border-color);
+    transform: translate(-2px, -2px);
 }
 
-.admin-form-group {
-    margin-bottom: 22px;
+/* Evita el fondo azul/amarillo del autocompletado del navegador */
+.admin-form-control:-webkit-autofill,
+.admin-form-control:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-main);
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-main) inset;
 }
 
-/* Botón de acceso */
-
+/* ---------- Botón principal ---------- */
 .admin-submit {
+    display: block;
     width: 100%;
-    min-height: 50px;
-    padding: 14px 18px;
-    border: 1px solid var(--admin-black);
-    border-radius: 2px;
-    background: var(--admin-black);
-    color: white;
+    margin-top: 8px;
+    padding: 16px;
+    background: var(--text-main);
+    color: var(--bg-main);
+    border: 2px solid var(--border-color);
+    border-radius: 0;
     font-family: 'Space Mono', monospace;
     font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition: var(--transition);
 }
 
 .admin-submit:hover {
-    background: var(--admin-accent);
-    border-color: var(--admin-accent);
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
-.admin-submit:focus-visible {
-    outline: 3px solid var(--admin-accent);
+.admin-submit:active {
+    transform: translate(2px, 2px);
+}
+
+.admin-submit:focus-visible,
+.admin-back:focus-visible {
+    outline: 3px solid var(--accent);
     outline-offset: 3px;
 }
 
-/* Mensajes y pie */
-
-.admin-error {
-    margin-bottom: 22px;
-    padding: 13px 15px;
-    border: 1px solid #e7b7ae;
-    border-left: 4px solid var(--admin-accent);
-    background: #fff4f1;
-    color: #842414;
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
+/* ---------- Pie de la tarjeta ---------- */
 .admin-card-footer {
-    padding: 16px 24px;
-    border-top: 1px solid #e5e5e5;
-    background: #fafafa;
-    color: var(--admin-muted);
-    text-align: center;
+    padding: 14px 32px;
+    background: var(--bg-alt);
+    border-top: 2px solid var(--border-color);
     font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.4px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-align: center;
 }
 
-/* Enlace para volver a la tienda */
-
+/* ---------- Enlace "volver" ---------- */
 .admin-back {
     display: inline-block;
-    margin-top: 25px;
-    color: #555555;
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-main);
     font-family: 'Space Mono', monospace;
     font-size: 0.75rem;
+    font-weight: 700;
     text-decoration: none;
+    transition: var(--transition);
 }
 
 .admin-back:hover {
-    color: var(--admin-accent);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
-@media (max-width: 576px) {
-    .admin-topbar-inner {
-        padding: 18px 20px;
-    }
-
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
     .admin-login-main {
-        padding: 35px 18px;
-        align-items: flex-start;
+        padding: 40px 16px;
     }
 
-    .admin-card-header {
-        padding: 25px 22px 20px;
+    .admin-login-card {
+        box-shadow: 5px 5px 0 0 var(--border-color);
+    }
+
+    .admin-card-header,
+    .admin-card-body {
+        padding: 24px 20px;
     }
 
     .admin-card-header h1 {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-form-control,
+    .admin-submit,
+    .admin-back {
+        transition: none;
     }
 
-    .admin-card-body {
-        padding: 24px 22px;
+    .admin-form-control:focus,
+    .admin-submit:active {
+        transform: none;
     }
 }
