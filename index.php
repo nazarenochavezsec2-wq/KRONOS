@@ -20,7 +20,7 @@ function slugCategoria($texto) {
 }
 
 // Solo se muestran los productos activos (estado = 1)
-$sentencia = $conexion->prepare( "SELECT * FROM tbl_productos WHERE estado = 1 ORDER BY id DESC" ); 
+$sentencia = $conexion->prepare( "SELECT p.*, t.nombre AS temporada FROM tbl_productos p LEFT JOIN tbl_temporadas t ON t.id = p.id_temporada WHERE p.estado = 1 ORDER BY p.id DESC" ); 
 $sentencia->execute(); 
 $lista_productos = $sentencia->fetchAll(PDO::FETCH_ASSOC); 
 

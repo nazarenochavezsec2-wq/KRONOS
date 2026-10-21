@@ -726,3 +726,18 @@ body.admin-body .admin-file-name {
     padding-top: 24px;
     border-top: 2px solid var(--border-color);
 }
+
+/* ==========================================================
+   BOTONES DESHABILITADOS (ej: "Eliminar" de una temporada en uso)
+   ========================================================== */
+body.admin-body .btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: auto; /* permite ver el tooltip (title) */
+}
+
+body.admin-body .btn-danger:disabled {
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--accent);
+    --bs-btn-disabled-border-color: var(--accent);
+}
