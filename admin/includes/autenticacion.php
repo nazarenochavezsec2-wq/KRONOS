@@ -7,6 +7,6 @@ if (session_status() === PHP_SESSION_NONE) {
 if ( !isset($_SESSION["autenticado"]) || 
     $_SESSION["autenticado"] !== true 
 ) { 
-    header("Location: /website/admin/login.php"); 
+    header("Location: /Kronos/admin/login.php"); 
     exit; 
 }

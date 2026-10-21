@@ -52,11 +52,11 @@ body.admin-body main p {
     line-height: 1.6;
 }
 
-body.admin-body a {
+body.admin-body a:where(:not(.btn)) {
     color: var(--text-main);
 }
 
-body.admin-body a:hover {
+body.admin-body a:where(:not(.btn)):hover {
     color: var(--accent);
 }
 
@@ -632,12 +632,97 @@ body.admin-body .btn-sm {
    La regla "body.admin-body a" pisaba el color de .btn
    ========================================================== */
 body.admin-body a.btn {
-    color: var(--bs-btn-color);
+    color: var(--bs-btn-color) !important;
     text-decoration: none;
 }
 
 body.admin-body a.btn:hover,
 body.admin-body a.btn:focus-visible,
 body.admin-body a.btn:active {
-    color: var(--bs-btn-hover-color);
+    color: var(--bs-btn-hover-color) !important;
+}
+
+/* ==========================================================
+   ETIQUETAS DE ESTADO Y STOCK (sección Productos)
+   ========================================================== */
+body.admin-body .admin-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--text-main);
+    color: var(--bg-main);
+    border: 2px solid var(--border-color);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+body.admin-body .admin-badge-off {
+    background: var(--bg-main);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+body.admin-body td.admin-stock-empty {
+    color: var(--accent);
+}
+
+/* ==========================================================
+   FORMULARIOS (crear / editar)
+   ========================================================== */
+
+/* Botón "Seleccionar archivo" con el look de los botones del panel */
+body.admin-body .form-control[type="file"] {
+    padding: 0 14px 0 0;
+    overflow: hidden;
+}
+
+body.admin-body .form-control[type="file"]::file-selector-button {
+    margin: 0 14px 0 0;
+    padding: 12px 16px;
+    background: var(--text-main);
+    color: var(--bg-main);
+    border: 0;
+    border-right: 2px solid var(--border-color);
+    border-radius: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+body.admin-body .form-control[type="file"]:hover:not(:disabled):not([readonly])::file-selector-button {
+    background: var(--accent);
+}
+
+body.admin-body .form-text {
+    margin-top: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+body.admin-body textarea.form-control {
+    resize: vertical;
+}
+
+/* Nombre de la imagen actual */
+body.admin-body .admin-file-name {
+    margin-bottom: 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    word-break: break-all;
+}
+
+/* Fila de botones al final del formulario */
+.admin-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border-color);
 }

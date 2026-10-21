@@ -1,6 +1,6 @@
 <?php 
 $servidor = "localhost"; 
-$baseDeDatos = "website"; 
+$baseDeDatos = "hive"; 
 $usuario = "root"; 
 $contrasenia = ""; 
 try { 

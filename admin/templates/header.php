@@ -26,7 +26,7 @@
 
     <nav class="navbar navbar-expand-lg admin-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../index.html">HIVE_ARCHIVE / ADMIN</a>
+    <a class="navbar-brand" href="/Kronos/index.html">HIVE_ARCHIVE / ADMIN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Mostrar Navegacion" > 
         <span class="navbar-toggler-icon"></span> 
     </button> 
