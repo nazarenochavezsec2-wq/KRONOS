@@ -1,83 +1,11 @@
-// BASE DE DATOS EDITORIAL
-const products = [
-    {
-        id: 1,
-        title: "KRONOS ARCHIVE HOODIE 'V-01'",
-        category: "hoodies",
-        price: 48900,
-        image: "img/1.jpg",
-        tag: "SERIES A",
-        sizes: ["S", "M", "L", "XL"]
-    },
-    {
-        id: 2,
-        title: "HEAVY TACTICAL PANTS 'RAW'",
-        category: "cargo",
-        price: 54000,
-        image: "img/2.jpg",
-        tag: "SERIES B",
-        sizes: ["S", "M", "L", "XL"]
-    },
-    {
-        id: 3,
-        title: "BOXIER GRAPHIC TEE '01'",
-        category: "tees",
-        price: 24500,
-        image: "img/3.jpg",
-        tag: "LIMITED",
-        sizes: ["M", "L", "XL"]
-    },
-    {
-        id: 4,
-        title: "ZIP ARCHIVE JACKET",
-        category: "hoodies",
-        price: 51000,
-        image: "img/4.jpg",
-        tag: "SERIES A",
-        sizes: ["S", "M", "L", "XL"]
-    },
-    {
-        id: 5,
-        title: "PARACHUTE VOLUME TROUSERS",
-        category: "cargo",
-        price: 56000,
-        image: "img/5.jpg",
-        tag: "SERIES B",
-        sizes: ["M", "L", "XL"]
-    },
-    {
-        id: 6,
-        title: "LONGSLEEVE STRUCTURAL",
-        category: "tees",
-        price: 28900,
-        image: "img/6.jpg",
-        tag: "LIMITED",
-        sizes: ["S", "M", "L"]
-    },
-    {
-        id: 7,
-        title: "ARCHIVAL UTILITY BAG",
-        category: "cargo",
-        price: 21000,
-        image: "img/7.jpg",
-        tag: "ACCESSORY",
-        sizes: ["U"]
-    },
-    {
-        id: 8,
-        title: "HEAVYWEIGHT WASHED TEE",
-        category: "tees",
-        price: 23000,
-        image: "img/8.jpg",
-        tag: "ESSENTIAL",
-        sizes: ["S", "M", "L", "XL"]
-    }
-];
+// Los productos ya NO están escritos acá: los genera PHP desde la base de datos
+// y este script los lee de los atributos data-* de cada carta (.brutal-card).
 
 let cart = [];
-let selectedSizes = {};
+let products = [];
 
 const productGrid = document.getElementById('productGrid');
+const noItems = document.getElementById('noItems');
 const filterBtns = document.querySelectorAll('.f-btn');
 const cartToggle = document.getElementById('cartToggle');
 const closeCart = document.getElementById('closeCart');
@@ -89,82 +17,76 @@ const cartTotalPrice = document.getElementById('cartTotalPrice');
 const checkoutBtn = document.getElementById('checkoutBtn');
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderProducts(products);
+    loadProductsFromDOM();
+    setupGrid();
     setupFilters();
     setupCart();
 });
 
-function renderProducts(items) {
-    productGrid.innerHTML = '';
-    
-    if (items.length === 0) {
-        productGrid.innerHTML = `<p style="padding: 40px; font-family: 'Space Mono', monospace;">NO ITEMS FOUND IN THIS SELECTION.</p>`;
-        return;
-    }
+// Arma la lista de productos leyendo las cartas que dibujó PHP
+function loadProductsFromDOM() {
+    products = Array.from(document.querySelectorAll('.brutal-card')).map(card => ({
+        id: Number(card.dataset.id),
+        title: card.dataset.title,
+        category: card.dataset.category,
+        price: Number(card.dataset.price),
+        image: card.dataset.image
+    }));
+}
 
-    items.forEach(product => {
-        if (!selectedSizes[product.id]) {
-            selectedSizes[product.id] = product.sizes[0];
+// Talles y botón "ADD TO BAG" (un solo listener para toda la grilla)
+function setupGrid() {
+    productGrid.addEventListener('click', (e) => {
+        const sizeBtn = e.target.closest('.s-btn');
+        if (sizeBtn) {
+            sizeBtn.parentElement.querySelectorAll('.s-btn').forEach(b => b.classList.remove('active'));
+            sizeBtn.classList.add('active');
+            return;
         }
 
-        const card = document.createElement('div');
-        card.classList.add('brutal-card');
-        
-        card.innerHTML = `
-            <div class="card-img-wrap">
-                <span class="brutal-badge">${product.tag}</span>
-                <img src="${product.image}" alt="${product.title}">
-            </div>
-            <div class="card-body">
-                <div class="card-meta">
-                    <h3 class="card-title">${product.title}</h3>
-                    <div class="card-price">$${product.price.toLocaleString()}</div>
-                </div>
-                <div class="card-actions">
-                    <div class="brutal-sizes" id="sizes-${product.id}">
-                        ${product.sizes.map(size => `
-                            <button class="s-btn ${selectedSizes[product.id] === size ? 'active' : ''}" 
-                                    onclick="selectSize(${product.id}, '${size}')">${size}</button>
-                        `).join('')}
-                    </div>
-                    <button class="brutal-add-btn" onclick="addToCart(${product.id})">ADD TO BAG</button>
-                </div>
-            </div>
-        `;
-        productGrid.appendChild(card);
+        const addBtn = e.target.closest('.brutal-add-btn');
+        if (addBtn && !addBtn.disabled) {
+            const card = addBtn.closest('.brutal-card');
+            const activeSize = card.querySelector('.s-btn.active');
+            addToCart(Number(card.dataset.id), activeSize ? activeSize.textContent : '');
+        }
     });
 }
 
-window.selectSize = function(productId, size) {
-    selectedSizes[productId] = size;
-    const container = document.getElementById(`sizes-${productId}`);
-    container.querySelectorAll('.s-btn').forEach(btn => {
-        if (btn.textContent === size) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-};
-
+// Los filtros ahora muestran/ocultan las cartas existentes
 function setupFilters() {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+
             const filter = btn.getAttribute('data-filter');
-            if (filter === 'all') {
-                renderProducts(products);
-            } else {
-                renderProducts(products.filter(p => p.category === filter));
+            let visible = 0;
+
+            document.querySelectorAll('.brutal-card').forEach(card => {
+                const show = filter === 'all' || card.dataset.category === filter;
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+
+            if (noItems) {
+                noItems.style.display = visible === 0 ? 'block' : 'none';
             }
         });
     });
 }
 
-window.addToCart = function(productId) {
+// Los nombres vienen de la base de datos: se escapan antes de meterlos en el HTML del carrito
+function escapeHTML(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML.replace(/"/g, '&quot;');
+}
+
+function addToCart(productId, size) {
     const product = products.find(p => p.id === productId);
-    const size = selectedSizes[productId];
+    if (!product) return;
+
     const existing = cart.find(item => item.id === productId && item.size === size);
 
     if (existing) {
@@ -175,7 +97,7 @@ window.addToCart = function(productId) {
 
     updateCartUI();
     openDrawer();
-};
+}
 
 window.removeFromCart = function(index) {
     cart.splice(index, 1);
@@ -202,9 +124,9 @@ function updateCartUI() {
         const el = document.createElement('div');
         el.classList.add('drawer-item');
         el.innerHTML = `
-            <img src="${item.image}" alt="">
+            <img src="${escapeHTML(item.image)}" alt="">
             <div class="item-info">
-                <h4>${item.title}</h4>
+                <h4>${escapeHTML(item.title)}</h4>
                 <p>SIZE: ${item.size} // QTY: ${item.quantity}</p>
                 <span class="item-price">$${sub.toLocaleString()}</span>
             </div>

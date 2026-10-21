@@ -27,7 +27,7 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
     $registro = $sentencia->fetch(PDO::FETCH_ASSOC); 
 
     if ($registro) { 
-        $rutaImagen = "(/Kronos/assets/img/productos/" . $registro["imagen"]; 
+        $rutaImagen = "../../../assets/img/productos/" . $registro["imagen"]; 
         if (is_file($rutaImagen)) { 
             unlink($rutaImagen); 
             }
@@ -74,7 +74,6 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                         <th scope="col">ID</th> 
                         <th scope="col">Nombre</th> 
                         <th scope="col">Imagen</th> 
-                        <th scope="col">Descripción</th> 
                         <th scope="col">Precio base y descuento</th> 
                         <th scope="col">Categoría y medidas</th>
                         <th scope="col">Stock</th>  
@@ -99,8 +98,6 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                             width="100" > 
                         </td>
  
-                        <td><?php echo escapar($producto["desc"]); ?></td> 
- 
                         <td> 
                             <strong>Base:</strong> <?php echo formatoPrecio($producto["precio_base"]); ?><br> 
 
@@ -114,6 +111,8 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
  
                         <td> 
                             <strong>Categoría:</strong> <?php echo escapar($producto["categoria"]); ?><br> 
+
+                            <strong>Temporada:</strong> <?php echo escapar($producto["temporada"]); ?><br> 
 
                             <strong>Peso:</strong> <?php echo escapar($producto["peso"]); ?> kg<br> 
 

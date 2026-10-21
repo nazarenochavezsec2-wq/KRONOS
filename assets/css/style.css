@@ -566,3 +566,52 @@ h1, h2, h3, h4, .brutal-logo, .brutal-add-btn, .f-btn {
         display: none;
     }
 }
+/* ==========================================================
+   CATÁLOGO DINÁMICO (productos generados con PHP)
+   ========================================================== */
+
+/* Precio anterior tachado cuando hay descuento */
+.card-price-old {
+    margin-right: 8px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+/* Etiqueta de descuento (arriba a la derecha de la imagen) */
+.brutal-badge-sale {
+    left: auto;
+    right: 12px;
+    background: var(--accent);
+}
+
+/* Botón de producto sin stock */
+.brutal-add-btn:disabled,
+.brutal-add-btn:disabled:hover {
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    border: 2px solid var(--border-color);
+    cursor: not-allowed;
+}
+
+/* Mensaje cuando no hay productos / el filtro no encuentra nada */
+.grid-empty {
+    grid-column: 1 / -1;
+    padding: 40px 0;
+    font-family: 'Space Mono', monospace;
+    color: var(--text-muted);
+}
+
+#noItems {
+    margin-top: 10px;
+}
+
+/* Temporada del producto (debajo del nombre) */
+.card-season {
+    margin-bottom: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}

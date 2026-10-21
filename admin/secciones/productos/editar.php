@@ -22,6 +22,7 @@ $precio_descuento = (isset($_POST["precio_descuento"]) && $_POST["precio_descuen
     ? (int)$_POST["precio_descuento"] 
     : null; 
 $categoria = isset($_POST["categoria"]) ? $_POST["categoria"] : ""; 
+$temporada = isset($_POST["temporada"]) ? $_POST["temporada"] : ""; 
 $peso = isset($_POST["peso"]) ? (float)$_POST["peso"] : 0; 
 $dimensiones = isset($_POST["dimensiones"]) ? (float)$_POST["dimensiones"] : 0; 
 $estado = isset($_POST["estado"]) ? (int)$_POST["estado"] : 1; 
@@ -47,7 +48,8 @@ $sentencia = $conexion->prepare(
         imagen = :imagen, 
         precio_base = :precio_base, 
         precio_descuento = :precio_descuento, 
-        categoria = :categoria, 
+        categoria = :categoria,
+        temporada = :temporada, 
         peso = :peso, 
         dimensiones = :dimensiones, 
         estado = :estado, 
@@ -61,6 +63,7 @@ $sentencia->bindParam(":imagen", $imagen);
 $sentencia->bindParam(":precio_base", $precio_base); 
 $sentencia->bindValue(":precio_descuento", $precio_descuento, $precio_descuento === null ? PDO::PARAM_NULL : PDO::PARAM_INT); 
 $sentencia->bindParam(":categoria", $categoria); 
+$sentencia->bindParam(":temporada", $temporada); 
 $sentencia->bindParam(":peso", $peso); 
 $sentencia->bindParam(":dimensiones", $dimensiones); 
 $sentencia->bindParam(":estado", $estado); 
@@ -123,7 +126,7 @@ include("../../templates/header.php");
                 <label class="form-label">Imagen actual</label> 
                 <br> 
                 <img 
-                src="/website/assets/img/productos/<?php echo escapar($registro['imagen']); ?>" 
+                src="/Kronos/assets/img/productos/<?php echo escapar($registro['imagen']); ?>" 
                 alt="<?php echo escapar($registro['nombre']); ?>" 
                 class="img-thumbnail mb-2" 
                 width="120" 
@@ -186,17 +189,32 @@ include("../../templates/header.php");
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="categoria" class="form-label">Categoría</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    name="categoria"
-                    id="categoria"
-                    value="<?php echo escapar($registro['categoria']); ?>" 
-                    placeholder="Categoría"
-                    required
-                />
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label for="categoria" class="form-label">Categoría</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="categoria"
+                        id="categoria"
+                        value="<?php echo escapar($registro['categoria']); ?>" 
+                        placeholder="Categoría"
+                        required
+                    />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="temporada" class="form-label">Temporada</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="temporada"
+                        id="temporada"
+                        value="<?php echo escapar($registro['temporada']); ?>" 
+                        placeholder="Ej: Invierno 2026"
+                        required
+                    />
+                </div>
             </div>
 
             <div class="row g-3 mb-3">
