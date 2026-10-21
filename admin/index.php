@@ -18,15 +18,15 @@
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
-    <a class="admin-tile" href="/website/admin/secciones/portafolio/">
+    <a class="admin-tile" href="/Kronos/admin/secciones/productos/">
         <div>
-            <h2>Portafolio</h2>
-            <p>Gestioná los trabajos publicados.</p>
+            <h2>Productos</h2>
+            <p>Gestioná los productos publicados.</p>
         </div>
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
-    <a class="admin-tile" href="/website/admin/secciones/entradas/">
+    <a class="admin-tile" href="/Kronos/admin/secciones/entradas/">
         <div>
             <h2>Entradas</h2>
             <p>Creá y editá las entradas del blog.</p>
@@ -34,7 +34,7 @@
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
-    <a class="admin-tile" href="/website/admin/secciones/equipo/">
+    <a class="admin-tile" href="/Kronos/admin/secciones/equipo/">
         <div>
             <h2>Equipo</h2>
             <p>Mantené al día los integrantes.</p>
@@ -42,7 +42,7 @@
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
-    <a class="admin-tile" href="/website/admin/secciones/configuraciones/">
+    <a class="admin-tile" href="/Kronos/admin/secciones/configuraciones/">
         <div>
             <h2>Configuraciones</h2>
             <p>Ajustá los datos generales del sitio.</p>
@@ -50,7 +50,7 @@
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
-    <a class="admin-tile" href="/website/admin/secciones/usuarios/">
+    <a class="admin-tile" href="/Kronos/admin/secciones/usuarios/">
         <div>
             <h2>Usuarios</h2>
             <p>Controlá quién accede al panel.</p>

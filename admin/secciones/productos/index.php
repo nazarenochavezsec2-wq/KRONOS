@@ -38,10 +38,17 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
     include("../../templates/header.php"); 
 ?>
 
+<section class="admin-page-head">
+    <span class="admin-eyebrow">/// SECCIÓN</span>
+    <h1>Portafolio</h1>
+</section>
+
 <div class="card">
-    <div class="card-header"><a class="btn btn-primary" href="crear.php">Agregar registro</a> </div>
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <span>Listado de proyectos</span>
+        <a class="btn btn-primary" href="crear.php">+ Agregar registro</a> 
+    </div>
     <div class="card-body">
-        <h4 class="card-title">Title</h4>
         <div
             class="table-responsive-sm"
         >
@@ -62,7 +69,7 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                  <tbody> 
                     <?php foreach($lista_portafolio as $registros){?> 
                     <tr class=""> 
-                        <td><?php echo $registros["ID"]; ?></td> 
+                        <td class="admin-cell-id"><?php echo $registros["ID"]; ?></td> 
  
                         <td> 
                             <strong><?php echo $registros["titulo"]; ?></strong> 
@@ -71,7 +78,7 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                             <?php echo $registros["subtitulo"]; ?> 
                             <br> 
  
-                            <a href="<?php echo $registros["url"]; ?>" target="_blank"><?php echo $registros["url"]; ?> 
+                            <a class="admin-cell-link" href="<?php echo $registros["url"]; ?>" target="_blank"><?php echo $registros["url"]; ?> 
                             </a> 
                         </td> 
  
@@ -86,15 +93,15 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                         <td><?php echo $registros["descripcion"]; ?></td> 
  
                         <td> 
-                            <strong>Cliente:</strong><?php echo $registros["cliente"]; ?><br> 
+                            <strong>Cliente:</strong> <?php echo $registros["cliente"]; ?><br> 
  
-                            <strong>Categoría:</strong><?php echo $registros["categoria"]; ?> 
+                            <strong>Categoría:</strong> <?php echo $registros["categoria"]; ?> 
                         </td> 
  
                        
                         <td> 
                             <div class="d-flex gap-2"> 
-                                <a class="btn btn-info" 
+                                <a class="btn btn-info btn-sm" 
                                 href="editar.php?txtID=<?php echo $registros['ID']; ?>" > 
                                 Editar 
                                 </a>  
@@ -111,7 +118,7 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                                 type="submit" 
                                 name="accion" 
                                 value="eliminar" 
-                                class="btn btn-danger" > 
+                                class="btn btn-danger btn-sm" > 
                                 Eliminar 
                                 </button> 
                             </form> 
@@ -127,4 +134,4 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
     </div>
 </div>
 
-<?php include("../../templates/footer.php"); ?> 
+<?php include("../../templates/footer.php"); ?>

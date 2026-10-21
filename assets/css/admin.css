@@ -569,3 +569,75 @@ body.admin-body .btn:focus-visible {
         transform: none;
     }
 }
+
+/* ==========================================================
+   VISTAS DE LISTADO (portafolio, servicios, etc.)
+   ========================================================== */
+
+.admin-page-head {
+    padding-bottom: 30px;
+}
+
+.admin-page-head h1 {
+    margin-bottom: 0;
+}
+
+body.admin-body .card-body {
+    padding: 24px;
+}
+
+/* Miniaturas: borde grueso, sin redondeo ni padding */
+body.admin-body .img-thumbnail {
+    padding: 0;
+    border: 2px solid var(--border-color);
+    border-radius: 0;
+    background: var(--bg-alt);
+    max-width: none;
+}
+
+/* Celda de ID en monoespaciada */
+body.admin-body td.admin-cell-id {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+}
+
+/* Enlaces largos dentro de la tabla */
+body.admin-body a.admin-cell-link {
+    display: inline-block;
+    max-width: 220px;
+    overflow-wrap: anywhere;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: underline;
+}
+
+body.admin-body a.admin-cell-link:hover {
+    color: var(--accent);
+}
+
+body.admin-body table.table td strong {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+}
+
+/* Botones chicos dentro de la tabla */
+body.admin-body .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+}
+
+/* ==========================================================
+   FIX: texto de los botones <a class="btn"> (Editar, Agregar)
+   La regla "body.admin-body a" pisaba el color de .btn
+   ========================================================== */
+body.admin-body a.btn {
+    color: var(--bs-btn-color);
+    text-decoration: none;
+}
+
+body.admin-body a.btn:hover,
+body.admin-body a.btn:focus-visible,
+body.admin-body a.btn:active {
+    color: var(--bs-btn-hover-color);
+}
