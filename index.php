@@ -20,7 +20,7 @@ function slugCategoria($texto) {
 }
 
 // Solo se muestran los productos activos (estado = 1)
-$sentencia = $conexion->prepare( "SELECT p.*, t.nombre AS temporada FROM tbl_productos p LEFT JOIN tbl_temporadas t ON t.id = p.id_temporada WHERE p.estado = 1 ORDER BY p.id DESC" ); 
+$sentencia = $conexion->prepare( "SELECT p.*, c.nombre AS categoria, t.nombre AS temporada FROM tbl_productos p LEFT JOIN tbl_categorias c ON c.id = p.id_categoria LEFT JOIN tbl_temporadas t ON t.id = p.id_temporada WHERE p.estado = 1 ORDER BY p.id DESC" ); 
 $sentencia->execute(); 
 $lista_productos = $sentencia->fetchAll(PDO::FETCH_ASSOC); 
 
@@ -149,7 +149,9 @@ $carpetaImagenes = "assets/img/productos/";
                  data-category="<?php echo escapar(slugCategoria($producto['categoria'])); ?>">
 
                 <div class="card-img-wrap">
-                    <span class="brutal-badge"><?php echo escapar(mb_strtoupper($producto["categoria"], "UTF-8")); ?></span>
+                    <?php if (!empty($producto["categoria"])) { ?>
+                        <span class="brutal-badge"><?php echo escapar(mb_strtoupper($producto["categoria"], "UTF-8")); ?></span>
+                    <?php } ?>
                     <?php if ($tieneDescuento) { ?>
                         <span class="brutal-badge brutal-badge-sale">-<?php echo $porcentaje; ?>%</span>
                     <?php } ?>

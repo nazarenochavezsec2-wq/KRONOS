@@ -43,7 +43,7 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
     exit; 
 }
 
-    $sentencia = $conexion->prepare( "SELECT p.*, t.nombre AS temporada FROM tbl_productos p LEFT JOIN tbl_temporadas t ON t.id = p.id_temporada ORDER BY p.id" ); 
+    $sentencia = $conexion->prepare( "SELECT p.*, c.nombre AS categoria, t.nombre AS temporada FROM tbl_productos p LEFT JOIN tbl_categorias c ON c.id = p.id_categoria LEFT JOIN tbl_temporadas t ON t.id = p.id_temporada ORDER BY p.id" ); 
 
     $sentencia->execute(); 
 
@@ -110,7 +110,7 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
                         </td> 
  
                         <td> 
-                            <strong>Categoría:</strong> <?php echo escapar($producto["categoria"]); ?><br> 
+                            <strong>Categoría:</strong> <?php echo escapar($producto["categoria"] !== null ? $producto["categoria"] : "—"); ?><br> 
 
                             <strong>Temporada:</strong> <?php echo escapar($producto["temporada"] !== null ? $producto["temporada"] : "—"); ?><br> 
 

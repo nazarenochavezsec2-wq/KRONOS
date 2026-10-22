@@ -21,7 +21,7 @@ $precio_base = isset($_POST["precio_base"]) ? (int)$_POST["precio_base"] : 0;
 $precio_descuento = (isset($_POST["precio_descuento"]) && $_POST["precio_descuento"] !== "") 
     ? (int)$_POST["precio_descuento"] 
     : null; 
-$categoria = isset($_POST["categoria"]) ? $_POST["categoria"] : ""; 
+$id_categoria = (isset($_POST["id_categoria"]) && (int)$_POST["id_categoria"] > 0) ? (int)$_POST["id_categoria"] : null; 
 $id_temporada = (isset($_POST["id_temporada"]) && (int)$_POST["id_temporada"] > 0) ? (int)$_POST["id_temporada"] : null; 
 $peso = isset($_POST["peso"]) ? (float)$_POST["peso"] : 0; 
 $dimensiones = isset($_POST["dimensiones"]) ? (float)$_POST["dimensiones"] : 0; 
@@ -48,7 +48,7 @@ $sentencia = $conexion->prepare(
         imagen = :imagen, 
         precio_base = :precio_base, 
         precio_descuento = :precio_descuento, 
-        categoria = :categoria,
+        id_categoria = :id_categoria,
         id_temporada = :id_temporada, 
         peso = :peso, 
         dimensiones = :dimensiones, 
@@ -62,7 +62,7 @@ $sentencia->bindParam(":desc", $desc);
 $sentencia->bindParam(":imagen", $imagen); 
 $sentencia->bindParam(":precio_base", $precio_base); 
 $sentencia->bindValue(":precio_descuento", $precio_descuento, $precio_descuento === null ? PDO::PARAM_NULL : PDO::PARAM_INT); 
-$sentencia->bindParam(":categoria", $categoria); 
+$sentencia->bindValue(":id_categoria", $id_categoria, $id_categoria === null ? PDO::PARAM_NULL : PDO::PARAM_INT); 
 $sentencia->bindValue(":id_temporada", $id_temporada, $id_temporada === null ? PDO::PARAM_NULL : PDO::PARAM_INT); 
 $sentencia->bindParam(":peso", $peso); 
 $sentencia->bindParam(":dimensiones", $dimensiones); 
@@ -95,6 +95,11 @@ if (!$registro) {
 $sentencia = $conexion->prepare( "SELECT id, nombre FROM tbl_temporadas ORDER BY nombre" ); 
 $sentencia->execute(); 
 $lista_temporadas = $sentencia->fetchAll(PDO::FETCH_ASSOC); 
+
+// Categorías disponibles para asignar al producto 
+$sentencia = $conexion->prepare( "SELECT id, nombre FROM tbl_categorias ORDER BY nombre" ); 
+$sentencia->execute(); 
+$lista_categorias = $sentencia->fetchAll(PDO::FETCH_ASSOC); 
 
 include("../../templates/header.php"); 
 ?> 
@@ -196,16 +201,20 @@ include("../../templates/header.php");
 
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                    <label for="categoria" class="form-label">Categoría</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="categoria"
-                        id="categoria"
-                        value="<?php echo escapar($registro['categoria']); ?>" 
-                        placeholder="Categoría"
-                        required
-                    />
+                    <label for="id_categoria" class="form-label">Categoría</label>
+                    <select class="form-select" name="id_categoria" id="id_categoria" required>
+                        <option value="">Seleccionar categoría</option>
+                        <?php foreach ($lista_categorias as $categoria) { ?>
+                            <option value="<?php echo escapar($categoria['id']); ?>" <?php echo ((int)$registro['id_categoria'] === (int)$categoria['id']) ? 'selected' : ''; ?>><?php echo escapar($categoria['nombre']); ?></option>
+                        <?php } ?>
+                    </select>
+                    <div class="form-text">
+                        <?php if (count($lista_categorias) === 0) { ?>
+                            Todavía no hay categorías. <a href="../categorias/crear.php">Creá una primero</a>.
+                        <?php } else { ?>
+                            ¿Falta alguna? <a href="../categorias/crear.php">Crear categoría</a>.
+                        <?php } ?>
+                    </div>
                 </div>
 
                 <div class="col-md-6">

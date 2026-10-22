@@ -42,7 +42,7 @@
             <a class="nav-link" href="/Kronos/admin/secciones/entradas/">Entradas</a> 
         </li>
         <li class="nav-item"> 
-            <a class="nav-link" href="/Kronos/admin/secciones/equipo/">Equipo</a> 
+            <a class="nav-link" href="/Kronos/admin/secciones/categorias/">Categoria</a> 
         </li> 
         <li class="nav-item"> 
             <a class="nav-link" href="/Kronos/admin/secciones/configuraciones/">Configuraciones</a> 
