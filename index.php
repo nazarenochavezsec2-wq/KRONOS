@@ -41,8 +41,8 @@ $carpetaImagenes = "assets/img/productos/";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIVE // EDITORIAL ARCHIVE</title>
-    <!-- Google Fonts: Syne & Space Mono -->
+    <title>HIVE // MINIMAL ARCHIVE</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,21 +51,21 @@ $carpetaImagenes = "assets/img/productos/";
 </head>
 <body>
 
-    <!-- BARRA EDITORIAL SUPERIOR -->
+    <!-- TICKER SUPERIOR -->
     <div class="brutal-ticker">
         <div class="ticker-content">
-            <span>[ ARCHIVE_01 // EDITORIAL DROP ]</span>
-            <span>[ WORLDWIDE SHIPPING ]</span>
-            <span>[ LIMITED SERIES 1/100 ]</span>
-            <span>[ ARCHIVE_01 // EDITORIAL DROP ]</span>
-            <span>[ WORLDWIDE SHIPPING ]</span>
+            <span>[ SYSTEM_ONLINE // MINIMAL Y2K ARCHIVE ]</span>
+            <span>[ WORLDWIDE SECURE SHIPPING ]</span>
+            <span>[ LIMITED DROP 1/100 ]</span>
+            <span>[ SYSTEM_ONLINE // MINIMAL Y2K ARCHIVE ]</span>
+            <span>[ WORLDWIDE SECURE SHIPPING ]</span>
         </div>
     </div>
 
-    <!-- NAVEGACIÓN BRUTALISTA -->
+    <!-- HEADER / NAVEGACIÓN -->
     <header class="brutal-header">
         <div class="nav-wrapper">
-            <a href="#" class="brutal-logo">HIVE_ARCHIVE</a>
+            <a href="#" class="brutal-logo">HIVE</a>
             <nav class="brutal-nav">
                 <a href="#index">01. INDEX</a>
                 <a href="#catalog">02. CATÁLOGO</a>
@@ -79,27 +79,31 @@ $carpetaImagenes = "assets/img/productos/";
                 </a>
 
                 <button class="brutal-bag-btn" id="cartToggle">
-                    CARRITO [<span id="cartCount">0</span>]
+                    BAG [<span id="cartCount">0</span>]
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- SECCIÓN HERO EDITORIAL -->
+    <!-- SECCIÓN HERO -->
     <section id="index" class="editorial-hero">
-        <div class="hero-grid-lines"></div>
         <div class="editorial-title-box">
-            <span class="sub-heading">SELECTION 2026 // N° 01</span>
-            <h1>RAW <br>STREET <br>FORM</h1>
-            <p>Indumentaria masculina de moldería estructural pesada. Diseñada sin concesiones comerciales, enfocada en la silueta y el volumen.</p>
+            <span class="sub-heading">SELECTION 2026 // MINIMAL DROP</span>
+            <h1>RAW <br>CYBER <br>FORM</h1>
+            <p>Indumentaria masculina de moldería estructural pesada con acabados minimalistas y estéticos. Diseñada para priorizar la silueta y la pureza visual.</p>
+            
+            
         </div>
         <div class="hero-image-editorial">
             <img src="img/portada.png" alt="Editorial Cover">
-            <div class="image-caption">FIG. 01 — OVERSIZED HEAVYWEIGHT STRUCTURE</div>
+            <div class="image-caption">
+                <span>FIG. 01 — MINIMAL CHROME STRUCTURE</span>
+                <span>ARCHIVE.SYS</span>
+            </div>
         </div>
     </section>
 
-    <!-- CATÁLOGO EDITORIAL -->
+    <!-- CATÁLOGO -->
     <section id="catalog" class="brutal-catalog">
         <div class="catalog-header-bar">
             <h2>CATÁLOGO // SELECCIÓN</h2>
@@ -132,7 +136,7 @@ $carpetaImagenes = "assets/img/productos/";
                 $sinStock = ((int)$producto["stock"] <= 0); 
                 $imagen = $carpetaImagenes . $producto["imagen"]; 
 
-                // Talles: si algún día agregás la columna "talles" (ej: "S,M,L") se usa; si no, talles por defecto 
+                // Talles 
                 $talles = ["S", "M", "L", "XL"]; 
                 if (!empty($producto["talles"])) { 
                     $lista = array_values(array_filter(array_map("trim", explode(",", $producto["talles"])))); 
@@ -194,16 +198,16 @@ $carpetaImagenes = "assets/img/productos/";
         <p class="grid-empty" id="noItems" style="display:none;">NO ITEMS FOUND IN THIS SELECTION.</p>
     </section>
 
-    <!-- MANIFIESTO EDITORIAL -->
+    <!-- MANIFIESTO -->
     <section id="manifesto" class="brutal-manifesto">
         <div class="manifesto-content">
-            <span class="manifesto-tag">// STATEMENT</span>
+            <span class="manifesto-tag">// STATEMENT.SYS</span>
             <h3>LA ROPA COMO ARQUITECTURA PORTÁTIL.</h3>
-            <p>Rechazamos la temporalidad rápida. Cada prenda de la serie HIVE ARCHIVE utiliza algodón de alta densidad (400gr+) y molderías amplias que transforman la silueta humana en un bloque escultórico.</p>
+            <p>Rechazamos la temporalidad rápida. Cada prenda de la serie utiliza algodón de alta densidad y molderías amplias que transforman la silueta humana en un bloque escultórico limpio.</p>
         </div>
     </section>
 
-    <!-- CARRITO / DRAWER EDITORIAL -->
+    <!-- CARRITO / DRAWER -->
     <div class="editorial-drawer" id="cartDrawer">
         <div class="drawer-header">
             <h3>SHOPPING BAG</h3>
@@ -224,11 +228,11 @@ $carpetaImagenes = "assets/img/productos/";
     </div>
     <div class="drawer-overlay" id="cartOverlay"></div>
 
-    <!-- FOOTER EDITORIAL -->
+    <!-- FOOTER -->
     <footer class="brutal-footer">
         <div class="footer-grid">
             <div>
-                <h4>HIVE ARCHIVE</h4>
+                <h4>HIVE CHROME ARCHIVE</h4>
                 <p>Santiago del Estero / Buenos Aires, ARG.</p>
                 <p>Envios a Todo el Pais</p>
             </div>
@@ -246,7 +250,7 @@ $carpetaImagenes = "assets/img/productos/";
             </div>
         </div>
         <div class="footer-bottom">
-            <span>&copy; 2026 HIVE ARCHIVE. ALL RIGHTS RESERVED.</span>
+            <span>&copy; 2026 HIVE CHROME ARCHIVE. ALL RIGHTS RESERVED.</span>
         </div>
     </footer>
 
