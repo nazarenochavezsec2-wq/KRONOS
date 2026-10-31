@@ -175,3 +175,232 @@ body.admin-login-body {
         font-size: 28px;
     }
 }
+
+/* =====================================================
+   REGISTRO — estilo HIVE (chrome / Y2K)
+===================================================== */
+
+.reg-body {
+    margin: 0;
+    background: #f2f0eb;
+    color: #171717;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.reg-page {
+    --r-ink: #242424;
+    --r-muted: #777777;
+    --r-border: #dededb;
+    --r-danger: #b3261e;
+    --r-chrome: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #bfc0c2 20%,
+        #f7f7f5 40%,
+        #929496 60%,
+        #ffffff 80%,
+        #c5c5c3 100%
+    );
+
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 40px 20px;
+}
+
+/* Marco cromado */
+.reg-frame {
+    width: 100%;
+    max-width: 480px;
+    padding: 13px;
+    border-radius: 22px;
+    background: var(--r-chrome);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.09);
+}
+
+.reg-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.reg-card {
+    padding: 40px 36px;
+    border-radius: 13px;
+    background: #ffffff;
+}
+
+.reg-tag {
+    display: block;
+    margin-bottom: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.reg-card h1 {
+    margin-bottom: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1.15;
+}
+
+.reg-text {
+    margin-bottom: 28px;
+    color: var(--r-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Formulario */
+.reg-form {
+    display: grid;
+    gap: 20px;
+}
+
+.reg-field {
+    display: grid;
+    gap: 8px;
+}
+
+.reg-field label {
+    color: var(--r-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.reg-field input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--r-border);
+    border-radius: 14px;
+    background: #f7f7f5;
+    color: #171717;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.reg-field input:focus {
+    outline: none;
+    border-color: var(--r-ink);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(36, 36, 36, 0.08);
+}
+
+.reg-hint {
+    color: var(--r-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+}
+
+.reg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px 22px;
+    border: 1px solid var(--r-ink);
+    border-radius: 30px;
+    background: var(--r-ink);
+    color: #ffffff;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reg-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+.reg-btn:focus-visible {
+    outline: 3px solid var(--r-ink);
+    outline-offset: 3px;
+}
+
+.reg-link {
+    color: var(--r-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.reg-link:hover {
+    color: var(--r-ink);
+    text-decoration: underline;
+}
+
+.reg-error {
+    padding: 13px 16px;
+    border: 1px solid var(--r-danger);
+    border-radius: 14px;
+    background: rgba(179, 38, 30, 0.07);
+    color: var(--r-danger);
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .reg-card {
+        padding: 30px 22px;
+    }
+}
+
+/* ===== Registro: complementos ===== */
+
+.admin-success {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--text-main);
+    border-radius: 14px;
+    background: #f7f7f5;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.7;
+}
+
+.admin-alt-link {
+    display: block;
+    padding: 18px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.admin-alt-link:hover {
+    color: var(--text-main);
+}
+
+a.admin-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+}

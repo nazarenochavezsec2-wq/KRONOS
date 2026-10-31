@@ -7,7 +7,7 @@
         $usuario = isset($_POST["usuario"])? trim($_POST["usuario"]): ""; 
         $passwordIngresada = isset($_POST["password"])? $_POST["password"]: ""; 
 
-        $sentencia = $conexion->prepare( "SELECT password FROM tbl_usuarios WHERE usuario = :usuario LIMIT 1" ); 
+        $sentencia = $conexion->prepare( "SELECT usuario, password, rol FROM tbl_usuarios WHERE usuario = :usuario LIMIT 1" ); 
         $sentencia->bindParam(":usuario", $usuario); 
         $sentencia->execute(); 
         $registro = $sentencia->fetch(PDO::FETCH_ASSOC);
@@ -15,13 +15,21 @@
         if ( $registro && password_verify($passwordIngresada, $registro["password"]) ) { 
             session_regenerate_id(true); 
             $_SESSION["autenticado"] = true; 
-            header("Location: index.php"); 
+            $_SESSION["usuario"] = $registro["usuario"]; 
+            $_SESSION["rol"] = $registro["rol"]; 
+
+            // El admin va al panel; los demás, a la página normal
+            if ($registro["rol"] === "admin") {
+                header("Location: index.php"); 
+            } else {
+                header("Location: ../index.php"); 
+            }
             exit;
         } else { 
             $mensajeError = "Credenciales incorrectas. Acceso denegado.";
         } 
     } 
-?> 
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -127,6 +135,8 @@
                     </form>
 
                 </div>
+
+                <a class="admin-alt-link" href="registro.php">¿No tenés cuenta? Registrate</a>
 
                 <div class="admin-card-footer">
                     <span>HIVE® ARCHIVE SYSTEM</span>

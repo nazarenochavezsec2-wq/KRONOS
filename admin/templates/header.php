@@ -22,7 +22,7 @@
 </head>
 <body class="admin-body">
 
-    <div class="admin-strip">/// CONTROL PANEL · HIVE ARCHIVE</div>
+    <div class="admin-strip">/// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE /// CONTROL PANEL · HIVE ARCHIVE  </div>
 
     <nav class="navbar navbar-expand-lg admin-navbar">
   <div class="container-fluid">
@@ -32,24 +32,7 @@
     </button> 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/Kronos/admin/secciones/temporadas/">Temporadas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/Kronos/admin/secciones/productos/">Productos</a>
-        </li>
-        <li class="nav-item"> 
-            <a class="nav-link" href="/Kronos/admin/secciones/entradas/">Entradas</a> 
-        </li>
-        <li class="nav-item"> 
-            <a class="nav-link" href="/Kronos/admin/secciones/categorias/">Categoria</a> 
-        </li> 
-        <li class="nav-item"> 
-            <a class="nav-link" href="/Kronos/admin/secciones/configuraciones/">Configuraciones</a> 
-        </li> 
-        <li class="nav-item"> 
-            <a class="nav-link" href="/Kronos/admin/secciones/usuarios/">Usuarios</a> 
-        </li> 
+
         <li class="nav-item"> 
             <a class="nav-link admin-nav-logout" href="/Kronos/admin/cerrar.php" >Cerrar Sesion</a> 
         </li> 

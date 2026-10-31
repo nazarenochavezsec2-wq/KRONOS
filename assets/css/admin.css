@@ -732,3 +732,619 @@ body.admin-body textarea.form-control {
     padding-top: 28px;
     border-top: 1px solid var(--border-color);
 }
+
+/* =====================================================
+   EQUIPO — estilo HIVE (chrome / Y2K)
+===================================================== */
+
+.team-wrap {
+    --t-ink: #242424;
+    --t-text: #171717;
+    --t-muted: #777777;
+    --t-border: #dededb;
+    --t-silver: #d9d9d7;
+    --t-danger: #b3261e;
+    --t-chrome: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #bfc0c2 20%,
+        #f7f7f5 40%,
+        #929496 60%,
+        #ffffff 80%,
+        #c5c5c3 100%
+    );
+    --t-shadow: 0 15px 40px rgba(0, 0, 0, 0.09);
+
+    margin: 1rem 0 4rem;
+}
+
+/* ---------- Barra superior ---------- */
+
+.team-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    margin-bottom: 35px;
+    border-top: 1px solid var(--t-border);
+    border-bottom: 1px solid var(--t-border);
+}
+
+.team-bar-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.team-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.team-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #777777;
+    box-shadow: 0 0 8px #999999;
+}
+
+/* ---------- Botones en píldora ---------- */
+
+.team-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border: 1px solid var(--t-ink);
+    border-radius: 30px;
+    background: var(--t-ink);
+    color: #ffffff;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.team-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+.team-pill:focus-visible {
+    outline: 3px solid var(--t-ink);
+    outline-offset: 3px;
+}
+
+.team-pill--ghost {
+    background: #ffffff;
+    border-color: var(--t-border);
+    color: var(--t-text);
+}
+
+.team-pill--ghost:hover {
+    background: var(--t-ink);
+    border-color: var(--t-ink);
+    color: #ffffff;
+}
+
+.team-pill--danger {
+    background: #ffffff;
+    border-color: var(--t-border);
+    color: var(--t-text);
+}
+
+.team-pill--danger:hover {
+    background: var(--t-danger);
+    border-color: var(--t-danger);
+    color: #ffffff;
+}
+
+.team-pill--small {
+    padding: 11px 14px;
+    font-size: 9px;
+}
+
+/* ---------- Grilla de tarjetas ---------- */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--t-border);
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(20, 35, 80, 0.025);
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    border-color: #bfc0c2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Foto con marco cromado */
+.team-photo {
+    position: relative;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 14px;
+    background: var(--t-chrome);
+}
+
+.team-photo img,
+.team-initial {
+    display: block;
+    width: 100%;
+    height: 290px;
+    border-radius: 9px;
+    object-fit: cover;
+}
+
+.team-initial {
+    display: grid;
+    place-items: center;
+    background: var(--t-silver);
+    color: var(--t-ink);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+}
+
+.team-id {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    padding: 7px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+/* Datos */
+.team-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 18px;
+    padding: 8px 19px 19px;
+}
+
+.team-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.team-role {
+    margin-top: 8px;
+    color: var(--t-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.team-actions {
+    display: flex;
+    gap: 8px;
+    padding-top: 15px;
+    border-top: 1px solid var(--t-border);
+}
+
+.team-actions > .team-pill,
+.team-actions form {
+    flex: 1;
+}
+
+.team-actions form {
+    display: flex;
+    margin: 0;
+}
+
+.team-actions form .team-pill {
+    flex: 1;
+}
+
+/* Estado vacío */
+.team-empty {
+    padding: 60px 20px;
+    border: 1px dashed #bfc0c2;
+    border-radius: 25px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.team-empty p {
+    margin-bottom: 20px;
+    color: var(--t-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+}
+
+/* ---------- Crear / editar ---------- */
+
+.team-editor {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 25px;
+    align-items: start;
+}
+
+/* Vista previa cromada */
+.team-preview {
+    padding: 13px;
+    border-radius: 22px;
+    background: var(--t-chrome);
+    box-shadow: var(--t-shadow);
+}
+
+.team-preview-top,
+.team-preview-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.team-preview-bottom span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.team-preview-frame {
+    height: 380px;
+    overflow: hidden;
+    border-radius: 13px;
+    background: var(--t-silver);
+}
+
+.team-preview-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-preview-frame .team-initial {
+    height: 100%;
+    border-radius: 0;
+    font-size: 110px;
+}
+
+/* Panel del formulario */
+.team-panel {
+    padding: 45px;
+    border: 1px solid var(--t-border);
+    border-radius: 25px;
+    background: #ffffff;
+}
+
+.team-panel-tag {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--t-ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.team-panel h2 {
+    margin-bottom: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 27px;
+    line-height: 1.3;
+    letter-spacing: -1px;
+}
+
+.team-form {
+    display: grid;
+    gap: 22px;
+}
+
+.team-field {
+    display: grid;
+    gap: 9px;
+}
+
+.team-field label {
+    color: var(--t-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.team-field input[type="text"],
+.team-field input[type="file"] {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid var(--t-border);
+    border-radius: 14px;
+    background: #f7f7f5;
+    color: var(--t-text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.team-field input[type="text"]:focus {
+    outline: none;
+    border-color: var(--t-ink);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(36, 36, 36, 0.08);
+}
+
+.team-field input[type="file"]::file-selector-button {
+    margin-right: 14px;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 25px;
+    background: var(--t-ink);
+    color: #ffffff;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.team-hint {
+    color: var(--t-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+}
+
+.team-form-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.team-error {
+    padding: 14px 18px;
+    border: 1px solid var(--t-danger);
+    border-radius: 14px;
+    background: rgba(179, 38, 30, 0.07);
+    color: var(--t-danger);
+    font-size: 14px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+    .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .team-editor {
+        grid-template-columns: 1fr;
+    }
+
+    .team-preview {
+        max-width: 420px;
+    }
+
+    .team-preview-frame {
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        gap: 13px;
+    }
+
+    .team-photo img,
+    .team-initial {
+        height: 230px;
+    }
+
+    .team-panel {
+        padding: 30px 22px;
+    }
+}
+
+@media (max-width: 560px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .team-card,
+    .team-pill {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =====================================================
+   USUARIOS (reutiliza .team-* y agrega la tabla)
+===================================================== */
+
+/* Campos de correo y contraseña: igual que los de texto */
+.team-field input[type="email"],
+.team-field input[type="password"] {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid var(--t-border);
+    border-radius: 14px;
+    background: #f7f7f5;
+    color: var(--t-text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.team-field input[type="email"]:focus,
+.team-field input[type="password"]:focus {
+    outline: none;
+    border-color: var(--t-ink);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(36, 36, 36, 0.08);
+}
+
+.team-panel--narrow {
+    max-width: 640px;
+}
+
+/* Avisos */
+.team-notice {
+    margin-bottom: 25px;
+    padding: 14px 18px;
+    border: 1px solid var(--t-border);
+    border-left: 4px solid var(--t-ink);
+    border-radius: 14px;
+    background: #ffffff;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.team-error--block {
+    margin-bottom: 25px;
+}
+
+/* Tarjeta con tabla */
+.user-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--t-border);
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(20, 35, 80, 0.025);
+}
+
+.user-table-wrap {
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th {
+    padding: 16px 22px;
+    background: #f7f7f5;
+    border-bottom: 1px solid var(--t-border);
+    color: var(--t-muted);
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.user-table td {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--t-border);
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.user-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.user-table tbody tr:hover {
+    background: #fafaf8;
+}
+
+.user-id {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--t-muted);
+}
+
+.user-person {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.user-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--t-chrome);
+    color: var(--t-ink);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.user-name {
+    font-weight: 700;
+}
+
+.user-badge {
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: var(--t-ink);
+    color: #ffffff;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.user-mail {
+    color: var(--t-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+}
+
+.user-col-actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.user-actions {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.user-actions form {
+    margin: 0;
+}
