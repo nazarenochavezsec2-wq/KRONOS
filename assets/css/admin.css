@@ -1,19 +1,44 @@
 /* ==========================================================
-   PANEL ADMINISTRATIVO · HIVE ARCHIVE
-   Se carga DESPUÉS de bootstrap, datatables y style.css,
-   así que reutiliza las variables de :root de style.css y
-   sobrescribe lo necesario de Bootstrap.
+   PANEL ADMINISTRATIVO · HIVE® — Y2K LUXURY EDITORIAL
    ========================================================== */
 
-/* Fallback por si style.css no se cargara */
 :root {
-    --bg-main: #ffffff;
-    --bg-alt: #f4f4f4;
-    --text-main: #000000;
-    --text-muted: #666666;
-    --border-color: #000000;
-    --accent: #ff2200;
-    --transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+    --bg-main: #f5f4ef;
+    --bg-white: #ffffff;
+    --bg-blue: #e8e6e1;
+
+    --blue: #171717;
+    --blue-light: #a3a3a3;
+    --pink: #888888;
+    --purple: #666666;
+    --silver: #cccccc;
+
+    --text-main: #121212;
+    --text-muted: #6b6b6b;
+
+    --border: #121212;
+    --border-color: #e0ded9;
+    --accent: #121212;
+
+    --chrome: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #e0ded9 20%,
+        #f5f4ef 40%,
+        #a3a3a3 60%,
+        #ffffff 80%,
+        #d1d0cb 100%
+    );
+
+    --gradient: linear-gradient(
+        120deg,
+        #121212,
+        #525252,
+        #a3a3a3
+    );
+
+    --shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ---------- Base ---------- */
@@ -23,7 +48,7 @@ body.admin-body {
     flex-direction: column;
     background: var(--bg-main);
     color: var(--text-main);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 body.admin-body > main {
@@ -35,21 +60,23 @@ body.admin-body main h1,
 body.admin-body main h2,
 body.admin-body main h3,
 body.admin-body main h4 {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Orbitron', sans-serif;
     text-transform: uppercase;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
 }
 
 body.admin-body main h1 {
-    font-size: 2.6rem;
+    font-size: 2.8rem;
     line-height: 1;
-    font-weight: 700;
+    font-weight: 900;
     margin-bottom: 20px;
 }
 
 body.admin-body main p {
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
 }
 
 body.admin-body a:where(:not(.btn)) {
@@ -57,17 +84,21 @@ body.admin-body a:where(:not(.btn)) {
 }
 
 body.admin-body a:where(:not(.btn)):hover {
-    color: var(--accent);
+    color: var(--text-muted);
 }
 
-/* ---------- Franja superior (equivale al ticker de la tienda) ---------- */
+/* ---------- Franja superior (Ticker Editorial) ---------- */
 .admin-strip {
     background: var(--text-main);
-    color: var(--bg-main);
+    color: white;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    padding: 8px 40px;
-    border-bottom: 2px solid var(--border-color);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ---------- Navbar ---------- */
@@ -75,74 +106,74 @@ body.admin-body a:where(:not(.btn)):hover {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--bg-main);
-    border-bottom: 2px solid var(--border-color);
+    background: rgba(245, 244, 239, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
     padding: 0;
 }
 
 .admin-navbar > .container-fluid {
-    max-width: 1400px;
-    padding: 20px 40px;
+    max-width: 1450px;
+    padding: 20px 55px;
 }
 
 .admin-navbar .navbar-brand {
     margin: 0;
     padding: 0;
-    font-family: 'Space Mono', monospace;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -2px;
     color: var(--text-main);
 }
 
 .admin-navbar .navbar-brand:hover {
-    color: var(--accent);
+    opacity: 0.7;
 }
 
 .admin-navbar .navbar-nav {
     flex-grow: 1;
     margin-right: 0 !important;
-    margin-left: 30px;
-    gap: 6px;
+    margin-left: 40px;
+    gap: 15px;
 }
 
 .admin-navbar .nav-link {
-    padding: 6px 10px;
+    padding: 8px 14px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    color: var(--text-main);
+    color: var(--text-muted);
     transition: var(--transition);
 }
 
 .admin-navbar .nav-link:hover,
 .admin-navbar .nav-link:focus-visible {
-    color: var(--accent);
+    color: var(--text-main);
 }
 
-/* "Cerrar sesión" como botón negro, igual que LOGIN / BAG en la tienda */
+/* Botón de cerrar sesión estilo cápsula elegante */
 .admin-navbar .admin-nav-logout {
     background: var(--text-main);
-    color: var(--bg-main);
-    padding: 10px 20px;
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: none;
 }
 
 .admin-navbar .admin-nav-logout:hover,
 .admin-navbar .admin-nav-logout:focus-visible {
-    background: var(--accent);
-    color: var(--bg-main);
+    background: #333333;
+    transform: translateY(-1px);
 }
 
 /* Botón hamburguesa */
 .admin-navbar .navbar-toggler {
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    padding: 6px 10px;
-}
-
-.admin-navbar .navbar-toggler:focus {
-    box-shadow: 3px 3px 0 0 var(--border-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 8px 12px;
+    background: white;
 }
 
 @media (min-width: 992px) {
@@ -158,8 +189,8 @@ body.admin-body a:where(:not(.btn)):hover {
 
     .admin-navbar .navbar-collapse {
         margin-top: 16px;
-        padding-top: 8px;
-        border-top: 2px solid var(--border-color);
+        padding-top: 16px;
+        border-top: 1px solid var(--border-color);
     }
 
     .admin-navbar .navbar-nav {
@@ -172,21 +203,17 @@ body.admin-body a:where(:not(.btn)):hover {
     }
 
     .admin-navbar .admin-nav-logout {
-        margin-top: 12px;
+        margin-top: 15px;
         text-align: center;
-        border-bottom: none;
-    }
-
-    .admin-strip {
-        padding: 8px 20px;
     }
 }
 
 /* ---------- Contenido principal ---------- */
 body.admin-body > main.container {
-    max-width: 1400px;
-    padding-left: 40px;
-    padding-right: 40px;
+    max-width: 1450px;
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-top: 50px;
 }
 
 @media (max-width: 768px) {
@@ -196,80 +223,87 @@ body.admin-body > main.container {
     }
 
     body.admin-body main h1 {
-        font-size: 1.9rem;
+        font-size: 2.1rem;
     }
 }
 
 .admin-eyebrow {
     display: block;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 10px;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
 }
 
 .admin-welcome {
     max-width: 760px;
-    padding-bottom: 50px;
+    padding-bottom: 45px;
 }
 
 .admin-welcome p {
-    font-size: 1.1rem;
-    max-width: 520px;
+    font-size: 15px;
+    max-width: 540px;
 }
 
-/* ---------- Accesos rápidos (index) ---------- */
+/* ---------- Accesos rápidos (index) con estilo flotante moderno ---------- */
 .admin-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    padding-top: 40px;
-    border-top: 2px solid var(--border-color);
+    padding-top: 45px;
+    border-top: 1px solid var(--border-color);
 }
 
 .admin-tile {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 40px;
-    min-height: 180px;
-    padding: 24px;
-    border: 2px solid var(--border-color);
-    background: var(--bg-main);
+    gap: 35px;
+    min-height: 200px;
+    padding: 32px;
+    border: 1px solid var(--border-color);
+    border-radius: 28px;
+    background: white;
     text-decoration: none;
     color: var(--text-main);
+    box-shadow: var(--shadow);
     transition: var(--transition);
 }
 
 .admin-tile:hover {
     color: var(--text-main);
-    box-shadow: 6px 6px 0 0 var(--border-color);
-    transform: translate(-3px, -3px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .admin-tile h2 {
     font-size: 1.2rem;
-    margin: 0 0 8px;
+    margin: 0 0 10px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: -0.5px;
 }
 
 .admin-tile p {
-    font-size: 0.9rem;
+    font-size: 13px;
     margin: 0;
 }
 
 .admin-tile-cta {
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 10px;
     font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .admin-tile:hover .admin-tile-cta {
-    color: var(--accent);
+    color: var(--text-muted);
 }
 
 .admin-tile-logout {
-    background: var(--bg-alt);
+    background: var(--bg-blue);
 }
 
 @media (max-width: 1024px) {
@@ -286,27 +320,29 @@ body.admin-body > main.container {
 
 /* ---------- Footer ---------- */
 .admin-footer {
-    margin-top: 60px;
-    border-top: 2px solid var(--border-color);
-    background: var(--bg-alt);
+    margin-top: 80px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-blue);
 }
 
 .admin-footer-inner {
-    max-width: 1400px;
+    max-width: 1450px;
     margin: 0 auto;
-    padding: 24px 40px;
+    padding: 30px 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 10px;
 }
 
 .admin-footer-brand {
     font-weight: 700;
     color: var(--text-main);
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: -1px;
 }
 
 .admin-footer-text {
@@ -320,17 +356,19 @@ body.admin-body > main.container {
 }
 
 /* ==========================================================
-   COMPONENTES PARA LAS SECCIONES (tablas, botones, formularios)
+   COMPONENTES (Botones, formularios, tablas de alta gama)
    ========================================================== */
 
-/* ---------- Botones ---------- */
+/* ---------- Botones en cápsula moderna ---------- */
 body.admin-body .btn {
-    border-width: 2px;
-    border-radius: 0;
+    border-width: 1px;
+    border-radius: 50px;
+    padding: 12px 24px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 1px;
     transition: var(--transition);
 }
 
@@ -339,28 +377,28 @@ body.admin-body .btn-success,
 body.admin-body .btn-info,
 body.admin-body .btn-dark {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #000;
-    --bs-btn-border-color: #000;
+    --bs-btn-bg: #121212;
+    --bs-btn-border-color: #121212;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: var(--accent);
-    --bs-btn-hover-border-color: var(--accent);
+    --bs-btn-hover-bg: #333333;
+    --bs-btn-hover-border-color: #333333;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: var(--accent);
-    --bs-btn-active-border-color: var(--accent);
-    --bs-btn-focus-shadow-rgb: 0, 0, 0;
+    --bs-btn-active-bg: #333333;
+    --bs-btn-active-border-color: #333333;
+    --bs-btn-focus-shadow-rgb: 18, 18, 18;
 }
 
 body.admin-body .btn-danger {
     --bs-btn-color: #fff;
-    --bs-btn-bg: var(--accent);
-    --bs-btn-border-color: var(--accent);
+    --bs-btn-bg: #d90429;
+    --bs-btn-border-color: #d90429;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #000;
-    --bs-btn-hover-border-color: #000;
+    --bs-btn-hover-bg: #b50322;
+    --bs-btn-hover-border-color: #b50322;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #000;
-    --bs-btn-active-border-color: #000;
-    --bs-btn-focus-shadow-rgb: 255, 34, 0;
+    --bs-btn-active-bg: #b50322;
+    --bs-btn-active-border-color: #b50322;
+    --bs-btn-focus-shadow-rgb: 217, 4, 41;
 }
 
 body.admin-body .btn-warning,
@@ -369,46 +407,54 @@ body.admin-body .btn-light,
 body.admin-body .btn-outline-primary,
 body.admin-body .btn-outline-secondary,
 body.admin-body .btn-outline-dark {
-    --bs-btn-color: #000;
+    --bs-btn-color: #121212;
     --bs-btn-bg: #fff;
-    --bs-btn-border-color: #000;
+    --bs-btn-border-color: var(--border-color);
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #000;
-    --bs-btn-hover-border-color: #000;
+    --bs-btn-hover-bg: #121212;
+    --bs-btn-hover-border-color: #121212;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #000;
-    --bs-btn-active-border-color: #000;
-    --bs-btn-focus-shadow-rgb: 0, 0, 0;
+    --bs-btn-active-bg: #121212;
+    --bs-btn-active-border-color: #121212;
+    --bs-btn-focus-shadow-rgb: 18, 18, 18;
 }
 
-/* ---------- Formularios ---------- */
+/* ---------- Formularios con inputs en formato píldora fluida ---------- */
 body.admin-body .form-label {
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
 body.admin-body .form-control,
 body.admin-body .form-select {
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    padding: 12px 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 15px 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
     transition: var(--transition);
 }
 
 body.admin-body .form-control:focus,
 body.admin-body .form-select:focus {
-    border-color: var(--border-color);
-    box-shadow: 4px 4px 0 0 var(--border-color);
-    transform: translate(-2px, -2px);
+    border-color: var(--text-main);
+    box-shadow: 0 0 0 4px rgba(18, 18, 18, 0.06);
+    outline: none;
+    background: white;
 }
 
 body.admin-body .form-check-input {
-    border: 2px solid var(--border-color);
-    border-radius: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 18px;
+    height: 18px;
 }
 
 body.admin-body .form-check-input:checked {
@@ -416,166 +462,153 @@ body.admin-body .form-check-input:checked {
     border-color: var(--text-main);
 }
 
-body.admin-body .form-check-input:focus {
-    box-shadow: 3px 3px 0 0 var(--border-color);
-}
-
-/* ---------- Tarjetas y alertas ---------- */
+/* ---------- Tarjetas y alertas con diseño limpios y curvos ---------- */
 body.admin-body .card {
-    border: 2px solid var(--border-color);
-    border-radius: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 32px;
+    background: white;
+    box-shadow: var(--shadow);
+    overflow: hidden;
 }
 
 body.admin-body .card-header,
 body.admin-body .card-footer {
-    background: var(--bg-alt);
+    background: var(--bg-blue);
     border-color: var(--border-color);
-    border-width: 2px;
+    border-width: 1px;
     border-radius: 0;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
     text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 20px 28px;
 }
 
 body.admin-body .alert {
-    border: 2px solid var(--border-color);
-    border-radius: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 12px;
+    padding: 18px 24px;
 }
 
 body.admin-body .alert-danger {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--bg-main);
+    border-color: #ffccd5;
+    color: #d90429;
+    background: #fff0f3;
 }
 
-/* ---------- Tablas (Bootstrap + DataTables) ---------- */
+/* ---------- Tablas modernas estilo minimalista ---------- */
 body.admin-body table.table {
-    border: 2px solid var(--border-color);
-    --bs-table-bg: var(--bg-main);
+    border: none;
+    --bs-table-bg: #fff;
     --bs-table-border-color: var(--border-color);
-    --bs-table-hover-bg: var(--bg-alt);
+    --bs-table-hover-bg: var(--bg-blue);
     margin-bottom: 0;
 }
 
 body.admin-body table.table thead th {
-    --bs-table-bg: #000;
-    --bs-table-color: #fff;
-    background-color: #000;
+    background-color: #121212;
     color: #fff;
-    border-color: #000;
-    box-shadow: none !important;
-    padding: 14px 16px;
+    border: none;
+    padding: 18px 24px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body.admin-body table.table thead th:first-child {
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+body.admin-body table.table thead th:last-child {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
 }
 
 body.admin-body table.table tbody td {
-    padding: 14px 16px;
+    padding: 18px 24px;
     vertical-align: middle;
-    font-size: 0.9rem;
-    border-color: var(--border-color);
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* Controles de DataTables */
 body.admin-body .dt-container {
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 11px;
 }
 
 body.admin-body .dt-container .dt-search input,
 body.admin-body .dt-container .dt-length select {
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    padding: 8px 12px;
-    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 12px 20px;
+    background: white;
     font-family: 'Space Mono', monospace;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
 }
 
 body.admin-body .dt-container .dt-search input:focus,
 body.admin-body .dt-container .dt-length select:focus {
     outline: none;
-    box-shadow: 3px 3px 0 0 var(--border-color);
+    box-shadow: 0 0 0 4px rgba(18, 18, 18, 0.06);
+    border-color: var(--text-main);
 }
 
 body.admin-body .dt-container .dt-paging .dt-paging-button {
-    border: 2px solid var(--border-color) !important;
-    border-radius: 0 !important;
-    background: var(--bg-main) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 50px !important;
+    background: white !important;
     color: var(--text-main) !important;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
-    margin: 0 2px;
+    margin: 0 4px;
+    padding: 8px 14px !important;
 }
 
 body.admin-body .dt-container .dt-paging .dt-paging-button:hover:not(.disabled),
 body.admin-body .dt-container .dt-paging .dt-paging-button.current {
     background: var(--text-main) !important;
-    color: var(--bg-main) !important;
+    color: white !important;
 }
 
-body.admin-body .dt-container .dt-paging .dt-paging-button.disabled {
-    opacity: 0.4;
-}
-
-/* ---------- SweetAlert2 (mensajes de éxito) ---------- */
+/* ---------- SweetAlert2 refinado ---------- */
 .swal2-popup {
-    border: 2px solid var(--border-color);
-    border-radius: 0 !important;
-    box-shadow: 8px 8px 0 0 var(--border-color);
-    font-family: 'Syne', sans-serif;
+    border: none;
+    border-radius: 35px !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15) !important;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 35px;
 }
 
 .swal2-title {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.2rem;
-    text-transform: uppercase;
+    letter-spacing: -0.5px;
 }
 
 .swal2-styled.swal2-confirm {
     background: var(--text-main) !important;
-    border-radius: 0 !important;
+    border-radius: 50px !important;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
     text-transform: uppercase;
-    box-shadow: none !important;
+    letter-spacing: 1px;
+    padding: 14px 30px !important;
 }
 
 .swal2-styled.swal2-confirm:hover {
-    background: var(--accent) !important;
+    background: #333333 !important;
 }
 
-/* ---------- Accesibilidad ---------- */
-body.admin-body a:focus-visible,
-body.admin-body .btn:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .admin-tile,
-    body.admin-body .form-control,
-    body.admin-body .form-select,
-    body.admin-body .btn {
-        transition: none;
-    }
-
-    .admin-tile:hover,
-    body.admin-body .form-control:focus,
-    body.admin-body .form-select:focus {
-        transform: none;
-    }
-}
-
-/* ==========================================================
-   VISTAS DE LISTADO (portafolio, servicios, etc.)
-   ========================================================== */
-
+/* ---------- Vistas de Listado y Miniaturas ---------- */
 .admin-page-head {
-    padding-bottom: 30px;
+    padding-bottom: 35px;
 }
 
 .admin-page-head h1 {
@@ -583,161 +616,119 @@ body.admin-body .btn:focus-visible {
 }
 
 body.admin-body .card-body {
-    padding: 24px;
+    padding: 28px;
 }
 
-/* Miniaturas: borde grueso, sin redondeo ni padding */
 body.admin-body .img-thumbnail {
-    padding: 0;
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    background: var(--bg-alt);
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    background: var(--bg-blue);
     max-width: none;
 }
 
-/* Celda de ID en monoespaciada */
 body.admin-body td.admin-cell-id {
     font-family: 'Space Mono', monospace;
     font-weight: 700;
 }
 
-/* Enlaces largos dentro de la tabla */
 body.admin-body a.admin-cell-link {
     display: inline-block;
     max-width: 220px;
     overflow-wrap: anywhere;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 10px;
     color: var(--text-muted);
     text-decoration: underline;
 }
 
 body.admin-body a.admin-cell-link:hover {
-    color: var(--accent);
+    color: var(--text-main);
 }
 
 body.admin-body table.table td strong {
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 11px;
 }
 
-/* Botones chicos dentro de la tabla */
 body.admin-body .btn-sm {
-    padding: 6px 12px;
-    font-size: 0.7rem;
+    padding: 8px 16px;
+    font-size: 9px;
+    border-radius: 50px;
 }
 
-/* ==========================================================
-   FIX: texto de los botones <a class="btn"> (Editar, Agregar)
-   La regla "body.admin-body a" pisaba el color de .btn
-   ========================================================== */
 body.admin-body a.btn {
     color: var(--bs-btn-color) !important;
     text-decoration: none;
 }
 
-body.admin-body a.btn:hover,
-body.admin-body a.btn:focus-visible,
-body.admin-body a.btn:active {
-    color: var(--bs-btn-hover-color) !important;
-}
-
-/* ==========================================================
-   ETIQUETAS DE ESTADO Y STOCK (sección Productos)
-   ========================================================== */
+/* ---------- Etiquetas de estado y stock ---------- */
 body.admin-body .admin-badge {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 6px 14px;
     background: var(--text-main);
-    color: var(--bg-main);
-    border: 2px solid var(--border-color);
+    color: white;
+    border-radius: 50px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 9px;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 body.admin-body .admin-badge-off {
-    background: var(--bg-main);
-    color: var(--accent);
-    border-color: var(--accent);
+    background: var(--bg-blue);
+    color: #d90429;
 }
 
 body.admin-body td.admin-stock-empty {
-    color: var(--accent);
+    color: #d90429;
 }
 
-/* ==========================================================
-   FORMULARIOS (crear / editar)
-   ========================================================== */
-
-/* Botón "Seleccionar archivo" con el look de los botones del panel */
+/* ---------- Formularios de archivos ---------- */
 body.admin-body .form-control[type="file"] {
-    padding: 0 14px 0 0;
+    padding: 0;
     overflow: hidden;
 }
 
 body.admin-body .form-control[type="file"]::file-selector-button {
-    margin: 0 14px 0 0;
-    padding: 12px 16px;
+    margin: 0 16px 0 0;
+    padding: 14px 22px;
     background: var(--text-main);
-    color: var(--bg-main);
-    border: 0;
-    border-right: 2px solid var(--border-color);
-    border-radius: 0;
+    color: white;
+    border: none;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: var(--transition);
 }
 
 body.admin-body .form-control[type="file"]:hover:not(:disabled):not([readonly])::file-selector-button {
-    background: var(--accent);
+    background: #333333;
 }
 
 body.admin-body .form-text {
-    margin-top: 6px;
+    margin-top: 8px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 10px;
     color: var(--text-muted);
 }
 
 body.admin-body textarea.form-control {
+    border-radius: 24px;
     resize: vertical;
 }
 
-/* Nombre de la imagen actual */
-body.admin-body .admin-file-name {
-    margin-bottom: 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    word-break: break-all;
-}
-
-/* Fila de botones al final del formulario */
 .admin-form-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 30px;
-    padding-top: 24px;
-    border-top: 2px solid var(--border-color);
-}
-
-/* ==========================================================
-   BOTONES DESHABILITADOS (ej: "Eliminar" de una temporada en uso)
-   ========================================================== */
-body.admin-body .btn:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-    pointer-events: auto; /* permite ver el tooltip (title) */
-}
-
-body.admin-body .btn-danger:disabled {
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: var(--accent);
-    --bs-btn-disabled-border-color: var(--accent);
+    gap: 15px;
+    margin-top: 35px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-color);
 }

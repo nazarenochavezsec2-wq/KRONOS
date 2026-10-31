@@ -1,252 +1,177 @@
-/* ==========================================================
-   LOGIN ADMINISTRATIVO · HIVE ARCHIVE
-   Hereda las variables de style.css (:root):
-   --bg-main, --bg-alt, --text-main, --text-muted,
-   --border-color, --accent, --transition
-   ========================================================== */
+/* =====================================================
+   HIVE® — LOGIN ARCHIVE STYLES (FLUID / MODERN EDITORIAL)
+===================================================== */
 
-/* Fallback por si login.css se carga sin style.css */
-:root {
-    --bg-main: #ffffff;
-    --bg-alt: #f4f4f4;
-    --text-main: #000000;
-    --text-muted: #666666;
-    --border-color: #000000;
-    --accent: #ff2200;
-    --transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
-}
-
-/* ---------- Estructura de la página ---------- */
-body.admin-login {
+body.admin-login-body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-alt);
-    /* Trama de cuadrícula sutil, en línea con el look editorial */
-    background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-    background-size: 40px 40px;
-    color: var(--text-main);
-    font-family: 'Syne', sans-serif;
+    margin: 0;
 }
 
 .admin-login-main {
-    flex: 1;
+    flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 60px 20px;
 }
 
-.admin-login-main > div {
+.admin-login-wrapper {
     width: 100%;
-    max-width: 460px;
+    max-width: 440px;
 }
 
-/* ---------- Tarjeta ---------- */
+/* Tarjeta principal: curvas suaves, sin líneas negras duras y sombra difusa */
 .admin-login-card {
-    background: var(--bg-main);
-    border: 2px solid var(--border-color);
-    box-shadow: 8px 8px 0 0 var(--border-color);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 35px;
+    padding: 50px 40px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Detalle superior sutil con gradiente */
+.admin-login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient);
+}
+
+.admin-card-header {
     margin-bottom: 30px;
 }
 
-/* Cabecera */
-.admin-card-header {
-    padding: 28px 32px;
-    border-bottom: 2px solid var(--border-color);
-}
-
-.admin-eyebrow {
-    display: block;
-    margin-bottom: 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent);
-}
-
 .admin-card-header h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    margin: 0 0 14px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin: 15px 0 10px 0;
+}
+
+.admin-card-header h1 span {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .admin-card-header p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 13px;
     color: var(--text-muted);
-    margin: 0;
+    line-height: 1.6;
 }
 
-/* Cuerpo */
-.admin-card-body {
-    padding: 32px;
-}
-
-/* ---------- Mensaje de error ---------- */
+/* Alerta de error en cápsula */
 .admin-error {
-    margin-bottom: 24px;
-    padding: 12px 16px;
-    border: 2px solid var(--accent);
-    border-left-width: 8px;
-    background: var(--bg-main);
-    color: var(--accent);
+    background: #fff0f3;
+    border: 1px solid #ffccd5;
+    color: #e63946;
+    padding: 12px 18px;
+    border-radius: 20px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 10px;
     font-weight: 700;
-    line-height: 1.4;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* ---------- Formulario ---------- */
+/* Campos de formulario */
 .admin-form-group {
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .admin-form-label {
     display: block;
-    margin-bottom: 8px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 9px;
     font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main);
-}
-
-.admin-form-control {
-    display: block;
-    width: 100%;
-    padding: 14px 16px;
-    background: var(--bg-main);
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    color: var(--text-main);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    transition: var(--transition);
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.admin-form-control::placeholder {
     color: var(--text-muted);
-    opacity: 0.7;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    padding-left: 5px;
 }
 
-.admin-form-control:hover {
-    background: var(--bg-alt);
+/* Inputs con formato de cápsula total (tipo píldora) */
+.admin-form-control {
+    width: 100%;
+    padding: 15px 22px;
+    background: #f8f9fc;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    color: var(--text-main);
+    transition: all 0.3s ease;
 }
 
 .admin-form-control:focus {
     outline: none;
-    background: var(--bg-main);
-    box-shadow: 4px 4px 0 0 var(--border-color);
-    transform: translate(-2px, -2px);
+    background: white;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(36, 36, 36, 0.05);
 }
 
-/* Evita el fondo azul/amarillo del autocompletado del navegador */
-.admin-form-control:-webkit-autofill,
-.admin-form-control:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--text-main);
-    -webkit-box-shadow: 0 0 0 1000px var(--bg-main) inset;
-}
-
-/* ---------- Botón principal ---------- */
-.admin-submit {
-    display: block;
+/* Botón principal en formato píldora fluida */
+.admin-submit-btn {
     width: 100%;
-    margin-top: 8px;
+    margin-top: 15px;
     padding: 16px;
-    background: var(--text-main);
-    color: var(--bg-main);
-    border: 2px solid var(--border-color);
-    border-radius: 0;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 50px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 10px;
     font-weight: 700;
-    text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
-.admin-submit:hover {
-    background: var(--accent);
-    border-color: var(--accent);
+.admin-submit-btn:hover {
+    background: var(--gradient);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-.admin-submit:active {
-    transform: translate(2px, 2px);
-}
-
-.admin-submit:focus-visible,
-.admin-back:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 3px;
-}
-
-/* ---------- Pie de la tarjeta ---------- */
+/* Footer interno de la tarjeta */
 .admin-card-footer {
-    padding: 14px 32px;
-    background: var(--bg-alt);
-    border-top: 2px solid var(--border-color);
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 8px;
     color: var(--text-muted);
-    text-align: center;
 }
 
-/* ---------- Enlace "volver" ---------- */
-.admin-back {
-    display: inline-block;
-    padding-bottom: 2px;
-    border-bottom: 2px solid var(--border-color);
-    color: var(--text-main);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.admin-back:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 768px) {
-    .admin-login-main {
-        padding: 40px 16px;
-    }
-
+/* Adaptación responsive */
+@media (max-width: 500px) {
     .admin-login-card {
-        box-shadow: 5px 5px 0 0 var(--border-color);
+        padding: 35px 20px;
+        border-radius: 25px;
     }
-
-    .admin-card-header,
-    .admin-card-body {
-        padding: 24px 20px;
-    }
-
+    
     .admin-card-header h1 {
-        font-size: 1.6rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .admin-form-control,
-    .admin-submit,
-    .admin-back {
-        transition: none;
-    }
-
-    .admin-form-control:focus,
-    .admin-submit:active {
-        transform: none;
+        font-size: 28px;
     }
 }

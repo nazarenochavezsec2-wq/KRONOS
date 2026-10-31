@@ -8,23 +8,17 @@
         $passwordIngresada = isset($_POST["password"])? $_POST["password"]: ""; 
 
         $sentencia = $conexion->prepare( "SELECT password FROM tbl_usuarios WHERE usuario = :usuario LIMIT 1" ); 
-
         $sentencia->bindParam(":usuario", $usuario); 
-
         $sentencia->execute(); 
-
         $registro = $sentencia->fetch(PDO::FETCH_ASSOC);
 
         if ( $registro && password_verify($passwordIngresada, $registro["password"]) ) { 
-            // Las credenciales son correctas 
             session_regenerate_id(true); 
             $_SESSION["autenticado"] = true; 
-
             header("Location: index.php"); 
             exit;
         } else { 
-            // Las credenciales son incorrectas 
-            $mensajeError = "El usuario o la contraseña son incorrectos.";
+            $mensajeError = "Credenciales incorrectas. Acceso denegado.";
         } 
     } 
 ?> 
@@ -34,115 +28,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIVE® | CONTROL PANEL LOGIN</title>
 
-    <title>Acceso administrativo | HIVE ARCHIVE</title>
+    <!-- Tipografías oficiales de la tienda -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tipografías de la tienda -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
-          rel="stylesheet">
-
-    <!-- Bootstrap: utilizado para el mensaje de error -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-    <!-- Estilos exclusivos del login -->
-    <link rel="stylesheet" href="../assets/css/login.css">
-
+    <!-- Estilos generales y específicos -->
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 
-<body class="admin-login">
+<body class="admin-login-body">
 
+    <!-- BARRA SUPERIOR -->
+    <div class="brutal-ticker">
+        <div class="ticker-content">
+            <span>✦ RESTRICTED AREA</span>
+            <span>✦ HIVE DIGITAL WORLD ADMIN</span>
+            <span>✦ SECURE ACCESS 2026</span>
+            <span>✦ RESTRICTED AREA</span>
+            <span>✦ HIVE DIGITAL WORLD ADMIN</span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
     <header class="brutal-header">
         <div class="nav-wrapper">
-            <a href="../index.html" class="brutal-logo">HIVE_ARCHIVE</a>
+            <a href="../index.php" class="brutal-logo">
+                HIVE<span>®</span>
+                <small>CONTROL PANEL</small>
+            </a>
+            <div class="nav-actions">
+                <a href="../index.php" class="brutal-bag-btn">
+                    <i class="fa-solid fa-arrow-left"></i> TIENDA
+                </a>
+            </div>
         </div>
     </header>
 
+    <!-- LOGIN MAIN CONTAINER -->
     <main class="admin-login-main">
-        <div>
+        <div class="admin-login-wrapper">
+
             <section class="admin-login-card">
-
+                
                 <div class="admin-card-header">
-                    <span class="admin-eyebrow">
-                        /// CONTROL PANEL
-                    </span>
-
-                    <h1>Iniciar sesión</h1>
-
-                    <p>
-                        Ingresá tus credenciales para administrar
-                        la tienda HIVE ARCHIVE.
-                    </p>
+                    <div class="sub-heading">
+                        <span class="status-dot"></span>
+                        SECURITY LEVEL / ADMIN
+                    </div>
+                    <h1>ADMIN<br><span>LOGIN.</span></h1>
+                    <p>Ingresá tus credenciales para administrar el catálogo y sistema de HIVE.</p>
                 </div>
 
                 <div class="admin-card-body">
 
                     <?php if ($mensajeError !== "") { ?>
                         <div class="admin-error" role="alert">
-                            <?php echo htmlspecialchars(
-                                $mensajeError,
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ); ?>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <?php echo htmlspecialchars($mensajeError, ENT_QUOTES, 'UTF-8'); ?>
                         </div>
                     <?php } ?>
 
                     <form action="" method="post">
 
                         <div class="admin-form-group">
-                            <label for="usuario" class="admin-form-label">
-                                Usuario
-                            </label>
-
-                            <input
-                                type="text"
-                                class="admin-form-control"
-                                name="usuario"
-                                id="usuario"
-                                placeholder="Nombre de usuario"
-                                autocomplete="username"
-                                required
+                            <label for="usuario" class="admin-form-label">USUARIO</label>
+                            <input 
+                                type="text" 
+                                class="admin-form-control" 
+                                name="usuario" 
+                                id="usuario" 
+                                placeholder="ej. admin_hive" 
+                                autocomplete="username" 
+                                required 
                                 autofocus
                             >
                         </div>
 
                         <div class="admin-form-group">
-                            <label for="password" class="admin-form-label">
-                                Contraseña
-                            </label>
-
-                            <input
-                                type="password"
-                                class="admin-form-control"
-                                name="password"
-                                id="password"
-                                placeholder="Ingresá tu contraseña"
-                                autocomplete="current-password"
+                            <label for="password" class="admin-form-label">CONTRASEÑA</label>
+                            <input 
+                                type="password" 
+                                class="admin-form-control" 
+                                name="password" 
+                                id="password" 
+                                placeholder="••••••••••••" 
+                                autocomplete="current-password" 
                                 required
                             >
                         </div>
 
-                        <button type="submit" class="admin-submit">
-                            ACCEDER AL PANEL →
+                        <button type="submit" class="admin-submit-btn">
+                            ACCEDER AL SISTEMA <i class="fa-solid fa-arrow-right"></i>
                         </button>
 
                     </form>
+
                 </div>
 
-                <footer class="admin-card-footer">
-                    ACCESO RESTRINGIDO · HIVE ARCHIVE
-                </footer>
+                <div class="admin-card-footer">
+                    <span>HIVE® ARCHIVE SYSTEM</span>
+                    <span>MMXXVI</span>
+                </div>
 
             </section>
 
-            <div class="text-center">
-                <a href="../index.html" class="admin-back">
-                    ← VOLVER A LA TIENDA
-                </a>
-            </div>
         </div>
     </main>
 
