@@ -57,6 +57,7 @@ foreach ($lista_productos as $producto) {
     if ($slug !== "" && !isset($categorias[$slug])) {
         $categorias[$slug] = $producto["categoria"];
     }
+    
 }
 // Obtener integrantes del equipo
 $equipo = [];
@@ -324,7 +325,7 @@ $carpetaImagenes = "assets/img/productos/";
 
                 <?php } ?>
 
-                <?php foreach ($lista_productos as $producto) {
+                                <?php foreach ($lista_productos as $producto) {
 
                     $precioBase = (int)$producto["precio_base"];
                     $precioDescuento = $producto["precio_descuento"];
@@ -361,6 +362,20 @@ $carpetaImagenes = "assets/img/productos/";
                             $talles = $lista;
                         }
                     }
+
+                    // ---- Datos para la vista rápida (FUERA del if de los talles) ----
+                    $descripcion = trim((string)($producto["descripcion"] ?? ""));
+
+                    $peso        = (float)($producto["peso"] ?? 0);
+                    $dimensiones = (float)($producto["dimensiones"] ?? 0);
+
+                    $pesoTexto = $peso > 0
+                        ? rtrim(rtrim(number_format($peso, 2, ",", "."), "0"), ",") . " kg"
+                        : "";
+
+                    $medidasTexto = $dimensiones > 0
+                        ? rtrim(rtrim(number_format($dimensiones, 2, ",", "."), "0"), ",") . " cm"
+                        : "";
                 ?>
 
                     <article class="brutal-card"
@@ -369,7 +384,13 @@ $carpetaImagenes = "assets/img/productos/";
                         data-price="<?php echo $precioFinal; ?>"
                         data-image="<?php echo escapar($imagen); ?>"
                         data-category="<?php echo escapar(slugCategoria($producto['categoria'] ?? '')); ?>"
-                        data-season="<?php echo escapar(slugCategoria($producto['temporada'] ?? '')); ?>">
+                        data-season="<?php echo escapar(slugCategoria($producto['temporada'] ?? '')); ?>"
+                        data-category-name="<?php echo escapar($producto['categoria'] ?? ''); ?>"
+                        data-season-name="<?php echo escapar($producto['temporada'] ?? ''); ?>"
+                        data-description="<?php echo escapar($descripcion); ?>"
+                        data-weight="<?php echo escapar($pesoTexto); ?>"
+                        data-dimensions="<?php echo escapar($medidasTexto); ?>"
+                        data-stock="<?php echo (int)$producto['stock']; ?>">
 
                         <div class="card-img-wrap">
 
@@ -395,9 +416,7 @@ $carpetaImagenes = "assets/img/productos/";
                                 loading="lazy"
                             >
 
-                            <div class="image-hover-text">
-                                HIVE / GENERACIÓN FUTURO
-                            </div>
+                            <button type="button" class="quick-btn">VISTA RÁPIDA +</button>
 
                         </div>
 
@@ -587,6 +606,62 @@ $carpetaImagenes = "assets/img/productos/";
 
     </main>
 
+        <!-- VISTA RÁPIDA DEL PRODUCTO -->
+    <div class="qv-overlay" id="qvOverlay" aria-hidden="true">
+
+        <div class="qv-dialog" role="dialog" aria-modal="true" aria-labelledby="qvTitle">
+
+            <button type="button" class="qv-close" id="qvClose" aria-label="Cerrar vista rápida">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="qv-media">
+                <div class="qv-frame">
+                    <div class="qv-frame-bar">
+                        <span id="qvCode">HIVE® / 000</span>
+                        <span id="qvSeasonTop"></span>
+                    </div>
+
+                    <div class="qv-image">
+                        <img id="qvImage" src="" alt="">
+                    </div>
+
+                    <div class="qv-frame-bar">
+                        <span>VISTA RÁPIDA</span>
+                        <span>HIVE® ✦</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qv-info">
+
+                <div class="qv-tags" id="qvTags"></div>
+
+                <h2 id="qvTitle"></h2>
+
+                <div class="qv-price" id="qvPrice"></div>
+
+                <p class="qv-desc" id="qvDesc"></p>
+
+                <dl class="qv-specs" id="qvSpecs"></dl>
+
+                <div class="qv-stock" id="qvStock"></div>
+
+                <div class="qv-sizes-block" id="qvSizesBlock">
+                    <span class="size-label">ELEGÍ TU TALLE</span>
+                    <div class="qv-sizes" id="qvSizes"></div>
+                </div>
+
+                <button type="button" class="qv-add" id="qvAdd">
+                    AGREGAR A LA BOLSA <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
     <!-- CARRITO -->
     <div class="editorial-drawer" id="cartDrawer">
 
@@ -673,6 +748,7 @@ $carpetaImagenes = "assets/img/productos/";
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/filtros.js"></script>
+    <script src="assets/js/vista-rapida.js"></script>
 
 </body>
 </html>
