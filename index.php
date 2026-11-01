@@ -1,4 +1,3 @@
-
 <?php
 require_once(__DIR__ . "/admin/bd.php");
 
@@ -50,7 +49,7 @@ $carpetaImagenes = "assets/img/productos/";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HIVE® | Y2K DIGITAL FASHION</title>
+    <title>HIVE® | MODA DIGITAL Y2K</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
@@ -64,13 +63,13 @@ $carpetaImagenes = "assets/img/productos/";
     <!-- BARRA SUPERIOR -->
     <div class="brutal-ticker">
         <div class="ticker-content">
-            <span>✦ WELCOME TO HIVE DIGITAL WORLD</span>
-            <span>✦ Y2K STREETWEAR COLLECTION</span>
-            <span>✦ WORLDWIDE SHIPPING</span>
-            <span>✦ NEW GENERATION / NEW STYLE</span>
-            <span>✦ WELCOME TO HIVE DIGITAL WORLD</span>
-            <span>✦ Y2K STREETWEAR COLLECTION</span>
-            <span>✦ WORLDWIDE SHIPPING</span>
+            <span>✦ BIENVENIDOS A HIVE DIGITAL WORLD</span>
+            <span>✦ COLECCIÓN STREETWEAR Y2K</span>
+            <span>✦ ENVÍOS A TODO EL MUNDO</span>
+            <span>✦ NUEVA GENERACIÓN / NUEVO ESTILO</span>
+            <span>✦ BIENVENIDOS A HIVE DIGITAL WORLD</span>
+            <span>✦ COLECCIÓN STREETWEAR Y2K</span>
+            <span>✦ ENVÍOS A TODO EL MUNDO</span>
         </div>
     </div>
 
@@ -80,26 +79,26 @@ $carpetaImagenes = "assets/img/productos/";
 
             <a href="#index" class="brutal-logo">
                 HIVE<span>®</span>
-                <small>DIGITAL FASHION</small>
+                <small>MODA DIGITAL</small>
             </a>
 
             <nav class="brutal-nav">
-                <a href="#index">HOME</a>
-                <a href="#catalog">SHOP</a>
-                <a href="#manifesto">ABOUT</a>
+                <a href="#index">INICIO</a>
+                <a href="#catalog">TIENDA</a>
+                <a href="#manifesto">NOSOTROS</a>
             </nav>
 
             <div class="nav-actions">
 
                 <a href="admin/login.php">
                     <button class="brutal-bag-btn" id="LoginLink">
-                        <i class="fa-regular fa-user"></i> LOGIN
+                        <i class="fa-regular fa-user"></i> INGRESAR
                     </button>
                 </a>
 
                 <button class="brutal-bag-btn cart-button" id="cartToggle">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    BAG [<span id="cartCount">0</span>]
+                    BOLSA [<span id="cartCount">0</span>]
                 </button>
 
             </div>
@@ -118,49 +117,49 @@ $carpetaImagenes = "assets/img/productos/";
 
                 <div class="sub-heading">
                     <span class="status-dot"></span>
-                    ONLINE STORE / EST. 2026
+                    TIENDA ONLINE / DESDE 2026
                 </div>
 
                 <div class="hero-label">
-                    <span>THE FUTURE IS NOW</span>
+                    <span>EL FUTURO ES AHORA</span>
                     <span>VOL. 01 — 2026</span>
                 </div>
 
                 <h1>
-                    DRESS<br>
-                    LIKE<br>
-                    <span>THE FUTURE.</span>
+                    VESTITE<br>
+                    COMO<br>
+                    <span>EL FUTURO.</span>
                 </h1>
 
                 <p>
-                    No rules. No limits. Just your own identity.
-                    Discover the new generation of streetwear.
-                    Welcome to the HIVE universe.
+                    Sin reglas. Sin límites. Solo tu propia identidad.
+                    Descubrí la nueva generación de streetwear.
+                    Bienvenidos al universo HIVE.
                 </p>
 
                 <div class="hero-buttons">
                     <a href="#catalog" class="hero-cta">
-                        EXPLORE COLLECTION
+                        EXPLORÁ LA COLECCIÓN
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
 
-                    <span class="hero-side-text">SCROLL TO DISCOVER ↓</span>
+                    <span class="hero-side-text">DESLIZÁ PARA DESCUBRIR ↓</span>
                 </div>
 
                 <div class="hero-bottom-info">
                     <div>
-                        <span>COLLECTION</span>
+                        <span>COLECCIÓN</span>
                         <strong>Y2K / 001</strong>
                     </div>
 
                     <div>
-                        <span>STYLE</span>
-                        <strong>FUTURE STREET</strong>
+                        <span>ESTILO</span>
+                        <strong>STREET FUTURISTA</strong>
                     </div>
 
                     <div>
-                        <span>STATUS</span>
-                        <strong>AVAILABLE NOW</strong>
+                        <span>ESTADO</span>
+                        <strong>DISPONIBLE AHORA</strong>
                     </div>
                 </div>
 
@@ -174,17 +173,17 @@ $carpetaImagenes = "assets/img/productos/";
                 </div>
 
                 <div class="hero-image-frame">
-                    <img src="img/portada.png" alt="HIVE Y2K Collection">
+                    <img src="img/portada.png" alt="Colección HIVE Y2K">
                 </div>
 
                 <div class="hero-image-bottom">
-                    <span>FUTURE GENERATION</span>
-                    <span>EST. MMXXVI ✦</span>
+                    <span>GENERACIÓN FUTURO</span>
+                    <span>DESDE MMXXVI ✦</span>
                 </div>
 
                 <div class="hero-floating-card">
-                    <span>NEW DROP</span>
-                    <strong>Y2K<br>ENERGY.</strong>
+                    <span>NUEVO DROP</span>
+                    <strong>ENERGÍA<br>Y2K.</strong>
                     <i class="fa-solid fa-star"></i>
                 </div>
 
@@ -194,13 +193,13 @@ $carpetaImagenes = "assets/img/productos/";
 
         <!-- BARRA DECORATIVA -->
         <div class="collection-strip">
-            <span>HIVE UNIVERSE</span>
+            <span>UNIVERSO HIVE</span>
             <span>✦</span>
-            <span>NEW GENERATION</span>
+            <span>NUEVA GENERACIÓN</span>
             <span>✦</span>
-            <span>STREET CULTURE</span>
+            <span>CULTURA URBANA</span>
             <span>✦</span>
-            <span>Y2K FOREVER</span>
+            <span>Y2K PARA SIEMPRE</span>
         </div>
 
         <!-- CATÁLOGO -->
@@ -209,16 +208,16 @@ $carpetaImagenes = "assets/img/productos/";
             <div class="catalog-intro">
 
                 <div>
-                    <span class="section-label">// 01 — THE COLLECTION</span>
-                    <h2>FIND YOUR<br><span>NEW IDENTITY.</span></h2>
+                    <span class="section-label">// 01 — LA COLECCIÓN</span>
+                    <h2>ENCONTRÁ TU<br><span>NUEVA IDENTIDAD.</span></h2>
                 </div>
 
                 <div class="catalog-description">
                     <p>
-                        Curated pieces for a new generation.
-                        Explore the HIVE collection and find your next statement.
+                        Piezas seleccionadas para una nueva generación.
+                        Explorá la colección HIVE y encontrá tu próxima declaración de estilo.
                     </p>
-                    <span>SELECT YOUR STYLE ↓</span>
+                    <span>ELEGÍ TU ESTILO ↓</span>
                 </div>
 
             </div>
@@ -227,13 +226,13 @@ $carpetaImagenes = "assets/img/productos/";
 
                 <div class="catalog-counter">
                     <span class="status-dot"></span>
-                    AVAILABLE PRODUCTS
+                    PRODUCTOS DISPONIBLES
                 </div>
 
                 <div class="filter-group">
 
                     <button class="f-btn active" data-filter="all">
-                        ALL PRODUCTS
+                        TODOS LOS PRODUCTOS
                     </button>
 
                     <?php foreach ($categorias as $slug => $nombreCategoria) { ?>
@@ -253,7 +252,7 @@ $carpetaImagenes = "assets/img/productos/";
                 <?php if (count($lista_productos) === 0) { ?>
 
                     <p class="grid-empty">
-                        NO PRODUCTS AVAILABLE AT THE MOMENT.
+                        NO HAY PRODUCTOS DISPONIBLES EN ESTE MOMENTO.
                     </p>
 
                 <?php } ?>
@@ -329,7 +328,7 @@ $carpetaImagenes = "assets/img/productos/";
                             >
 
                             <div class="image-hover-text">
-                                HIVE / FUTURE GENERATION
+                                HIVE / GENERACIÓN FUTURO
                             </div>
 
                         </div>
@@ -369,7 +368,7 @@ $carpetaImagenes = "assets/img/productos/";
                             <div class="card-actions">
 
                                 <div class="size-label">
-                                    SELECT SIZE
+                                    ELEGÍ TU TALLE
                                 </div>
 
                                 <div class="brutal-sizes">
@@ -390,13 +389,13 @@ $carpetaImagenes = "assets/img/productos/";
                                 <?php if ($sinStock) { ?>
 
                                     <button type="button" class="brutal-add-btn" disabled>
-                                        SOLD OUT
+                                        AGOTADO
                                     </button>
 
                                 <?php } else { ?>
 
                                     <button type="button" class="brutal-add-btn">
-                                        ADD TO BAG <i class="fa-solid fa-arrow-right"></i>
+                                        AGREGAR A LA BOLSA <i class="fa-solid fa-arrow-right"></i>
                                     </button>
 
                                 <?php } ?>
@@ -412,7 +411,7 @@ $carpetaImagenes = "assets/img/productos/";
             </div>
 
             <p class="grid-empty" id="noItems" style="display:none;">
-                NO PRODUCTS FOUND IN THIS SELECTION.
+                NO HAY PRODUCTOS EN ESTA SELECCIÓN.
             </p>
 
         </section>
@@ -422,16 +421,16 @@ $carpetaImagenes = "assets/img/productos/";
 
             <div class="manifesto-visual">
                 <span class="manifesto-star">✳</span>
-                <span class="manifesto-small">WELCOME TO THE FUTURE</span>
-                <h2>BE<br>YOUR<br><span>OWN.</span></h2>
+                <span class="manifesto-small">BIENVENIDOS AL FUTURO</span>
+                <h2>SÉ<br>TU<br><span>MISMO.</span></h2>
                 <span class="manifesto-number">HIVE® / 001</span>
             </div>
 
             <div class="manifesto-content">
 
-                <span class="manifesto-tag">// 02 — ABOUT HIVE</span>
+                <span class="manifesto-tag">// 02 — SOBRE HIVE</span>
 
-                <h3>MORE THAN FASHION.<br>A WHOLE NEW ATTITUDE.</h3>
+                <h3>MÁS QUE MODA.<br>UNA ACTITUD TOTALMENTE NUEVA.</h3>
 
                 <p>
                     HIVE nace de la conexión entre la cultura urbana,
@@ -444,11 +443,11 @@ $carpetaImagenes = "assets/img/productos/";
                 <p>
                     Inspirados en la energía de los años 2000 y
                     reinterpretados para una nueva generación.
-                    This is your generation. This is HIVE.
+                    Esta es tu generación. Esto es HIVE.
                 </p>
 
                 <a href="#catalog" class="manifesto-link">
-                    DISCOVER THE COLLECTION
+                    DESCUBRÍ LA COLECCIÓN
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
 
@@ -463,8 +462,8 @@ $carpetaImagenes = "assets/img/productos/";
 
         <div class="drawer-header">
             <div>
-                <span class="drawer-small">HIVE® / YOUR SELECTION</span>
-                <h3>SHOPPING BAG</h3>
+                <span class="drawer-small">HIVE® / TU SELECCIÓN</span>
+                <h3>BOLSA DE COMPRAS</h3>
             </div>
 
             <button id="closeCart">
@@ -473,7 +472,7 @@ $carpetaImagenes = "assets/img/productos/";
         </div>
 
         <div class="drawer-items" id="cartItems">
-            <p class="empty-text">YOUR BAG IS EMPTY.</p>
+            <p class="empty-text">TU BOLSA ESTÁ VACÍA.</p>
         </div>
 
         <div class="drawer-footer">
@@ -484,12 +483,12 @@ $carpetaImagenes = "assets/img/productos/";
             </div>
 
             <button class="checkout-brutal-btn" id="checkoutBtn">
-                CHECKOUT VIA WHATSAPP
+                FINALIZAR COMPRA POR WHATSAPP
                 <i class="fa-brands fa-whatsapp"></i>
             </button>
 
             <p class="drawer-note">
-                THANK YOU FOR BEING PART OF HIVE.
+                GRACIAS POR SER PARTE DE HIVE.
             </p>
 
         </div>
@@ -505,30 +504,30 @@ $carpetaImagenes = "assets/img/productos/";
 
             <div class="footer-brand">
                 <a href="#index">HIVE<span>®</span></a>
-                <p>THE FUTURE BELONGS TO YOU.</p>
+                <p>EL FUTURO ES TUYO.</p>
             </div>
 
             <div class="footer-grid">
 
                 <div>
-                    <h4>EXPLORE</h4>
-                    <a href="#index">Home</a>
-                    <a href="#catalog">Shop</a>
-                    <a href="#manifesto">About us</a>
+                    <h4>EXPLORAR</h4>
+                    <a href="#index">Inicio</a>
+                    <a href="#catalog">Tienda</a>
+                    <a href="#manifesto">Nosotros</a>
                 </div>
 
                 <div>
-                    <h4>FOLLOW US</h4>
+                    <h4>SEGUINOS</h4>
                     <a href="#">Instagram ↗</a>
                     <a href="#">TikTok ↗</a>
                     <a href="#">WhatsApp ↗</a>
                 </div>
 
                 <div>
-                    <h4>LOCATION</h4>
+                    <h4>UBICACIÓN</h4>
                     <p>Santiago del Estero / Buenos Aires</p>
                     <p>Argentina</p>
-                    <p>Shipping nationwide</p>
+                    <p>Envíos a todo el país</p>
                 </div>
 
             </div>
@@ -536,8 +535,8 @@ $carpetaImagenes = "assets/img/productos/";
         </div>
 
         <div class="footer-bottom">
-            <span>© 2026 HIVE® DIGITAL FASHION.</span>
-            <span>MADE FOR THE NEXT GENERATION ✳</span>
+            <span>© 2026 HIVE® MODA DIGITAL.</span>
+            <span>HECHO PARA LA NUEVA GENERACIÓN ✳</span>
         </div>
 
     </footer>
