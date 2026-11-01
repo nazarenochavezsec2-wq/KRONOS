@@ -31,6 +31,26 @@ $lista_productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 // Obtener categorías
 $categorias = [];
 
+// Obtener temporadas que tienen productos activos
+$temporadas = [];
+
+$sentencia = $conexion->prepare("
+    SELECT DISTINCT t.id, t.nombre
+    FROM tbl_temporadas t
+    INNER JOIN tbl_productos p ON p.id_temporada = t.id
+    WHERE p.estado = 1
+    ORDER BY t.id ASC
+");
+$sentencia->execute();
+
+foreach ($sentencia->fetchAll(PDO::FETCH_ASSOC) as $fila) {
+    $slug = slugCategoria($fila["nombre"]);
+
+    if ($slug !== "" && !isset($temporadas[$slug])) {
+        $temporadas[$slug] = $fila["nombre"];
+    }
+}
+
 foreach ($lista_productos as $producto) {
     $slug = slugCategoria($producto["categoria"] ?? "");
 
@@ -38,6 +58,18 @@ foreach ($lista_productos as $producto) {
         $categorias[$slug] = $producto["categoria"];
     }
 }
+// Obtener integrantes del equipo
+$equipo = [];
+
+try {
+    $sentencia = $conexion->prepare("SELECT id, nombre, cargo, foto FROM equipo ORDER BY id ASC");
+    $sentencia->execute();
+    $equipo = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $equipo = []; // si la tabla no existe, la sección simplemente no se muestra
+}
+
+$carpetaEquipo = "assets/img/equipo/";
 
 $carpetaImagenes = "assets/img/productos/";
 ?>
@@ -86,6 +118,9 @@ $carpetaImagenes = "assets/img/productos/";
                 <a href="#index">INICIO</a>
                 <a href="#catalog">TIENDA</a>
                 <a href="#manifesto">NOSOTROS</a>
+                <?php if (count($equipo) > 0) { ?>
+                    <a href="#equipo">EQUIPO</a>
+                <?php } ?>
             </nav>
 
             <div class="nav-actions">
@@ -229,17 +264,49 @@ $carpetaImagenes = "assets/img/productos/";
                     PRODUCTOS DISPONIBLES
                 </div>
 
-                <div class="filter-group">
+                <div class="filter-stack">
 
-                    <button class="f-btn active" data-filter="all">
-                        TODOS LOS PRODUCTOS
-                    </button>
+                    <div class="filter-block">
+                        <span class="filter-label">CATEGORÍA</span>
 
-                    <?php foreach ($categorias as $slug => $nombreCategoria) { ?>
+                        <div class="filter-group" id="filterCategorias">
 
-                        <button class="f-btn" data-filter="<?php echo escapar($slug); ?>">
-                            <?php echo escapar(mb_strtoupper($nombreCategoria, "UTF-8")); ?>
-                        </button>
+                            <button class="f-btn active" data-filter="all">
+                                TODOS LOS PRODUCTOS
+                            </button>
+
+                            <?php foreach ($categorias as $slug => $nombreCategoria) { ?>
+
+                                <button class="f-btn" data-filter="<?php echo escapar($slug); ?>">
+                                    <?php echo escapar(mb_strtoupper($nombreCategoria, "UTF-8")); ?>
+                                </button>
+
+                            <?php } ?>
+
+                        </div>
+                    </div>
+
+                    <?php if (count($temporadas) > 0) { ?>
+
+                        <div class="filter-block">
+                            <span class="filter-label">TEMPORADA</span>
+
+                            <div class="filter-group" id="filterTemporadas">
+
+                                <button class="f-btn active" data-season="all">
+                                    TODAS
+                                </button>
+
+                                <?php foreach ($temporadas as $slug => $nombreTemporada) { ?>
+
+                                    <button class="f-btn" data-season="<?php echo escapar($slug); ?>">
+                                        <?php echo escapar(mb_strtoupper($nombreTemporada, "UTF-8")); ?>
+                                    </button>
+
+                                <?php } ?>
+
+                            </div>
+                        </div>
 
                     <?php } ?>
 
@@ -301,7 +368,8 @@ $carpetaImagenes = "assets/img/productos/";
                         data-title="<?php echo escapar($producto['nombre']); ?>"
                         data-price="<?php echo $precioFinal; ?>"
                         data-image="<?php echo escapar($imagen); ?>"
-                        data-category="<?php echo escapar(slugCategoria($producto['categoria'] ?? '')); ?>">
+                        data-category="<?php echo escapar(slugCategoria($producto['categoria'] ?? '')); ?>"
+                        data-season="<?php echo escapar(slugCategoria($producto['temporada'] ?? '')); ?>">
 
                         <div class="card-img-wrap">
 
@@ -455,6 +523,68 @@ $carpetaImagenes = "assets/img/productos/";
 
         </section>
 
+                <!-- EQUIPO -->
+        <?php if (count($equipo) > 0) { ?>
+
+        <section id="equipo" class="brutal-crew">
+
+            <div class="catalog-intro">
+
+                <div>
+                    <span class="section-label">// 03 — EL EQUIPO</span>
+                    <h2>LAS PERSONAS<br><span>DETRÁS DE HIVE.</span></h2>
+                </div>
+
+                <div class="catalog-description">
+                    <p>
+                        Un equipo que vive la moda y la cultura urbana.
+                        Conocé a quienes hacen que HIVE exista.
+                    </p>
+                    <span>EL EQUIPO HIVE ✦</span>
+                </div>
+
+            </div>
+
+            <div class="crew-grid">
+
+                <?php foreach ($equipo as $i => $miembro) { ?>
+
+                    <article class="crew-card">
+
+                        <div class="crew-bar">
+                            <span>HIVE® / <?php echo str_pad($i + 1, 2, "0", STR_PAD_LEFT); ?></span>
+                            <span>EQUIPO</span>
+                        </div>
+
+                        <div class="crew-photo">
+                            <?php if (!empty($miembro["foto"])) { ?>
+                                <img
+                                    src="<?php echo escapar($carpetaEquipo . $miembro['foto']); ?>"
+                                    alt="<?php echo escapar($miembro['nombre']); ?>"
+                                    loading="lazy"
+                                >
+                            <?php } else { ?>
+                                <div class="crew-initial">
+                                    <?php echo escapar(mb_strtoupper(mb_substr($miembro["nombre"], 0, 1, "UTF-8"), "UTF-8")); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="crew-info">
+                            <h3 class="crew-name"><?php echo escapar($miembro["nombre"]); ?></h3>
+                            <p class="crew-role"><?php echo escapar($miembro["cargo"]); ?></p>
+                        </div>
+
+                    </article>
+
+                <?php } ?>
+
+            </div>
+
+        </section>
+
+        <?php } ?>
+
     </main>
 
     <!-- CARRITO -->
@@ -525,7 +655,7 @@ $carpetaImagenes = "assets/img/productos/";
 
                 <div>
                     <h4>UBICACIÓN</h4>
-                    <p>Santiago del Estero / Buenos Aires</p>
+                    <p>Santiago del Estero / Capital, UCSE</p>
                     <p>Argentina</p>
                     <p>Envíos a todo el país</p>
                 </div>
@@ -542,6 +672,7 @@ $carpetaImagenes = "assets/img/productos/";
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/filtros.js"></script>
 
 </body>
 </html>
