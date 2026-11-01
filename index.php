@@ -71,10 +71,13 @@ try {
 }
 
 $carpetaEquipo = "assets/img/equipo/";
-
 $carpetaImagenes = "assets/img/productos/";
-?>
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$logueado = !empty($_SESSION["autenticado"]);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -85,9 +88,7 @@ $carpetaImagenes = "assets/img/productos/";
     <title>HIVE® | MODA DIGITAL Y2K</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -126,11 +127,27 @@ $carpetaImagenes = "assets/img/productos/";
 
             <div class="nav-actions">
 
-                <a href="admin/login.php">
-                    <button class="brutal-bag-btn" id="LoginLink">
-                        <i class="fa-regular fa-user"></i> INGRESAR
-                    </button>
-                </a>
+                <?php if ($logueado): ?>
+                    <span class="user-badge" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #fff;">
+                        <i class="fa-solid fa-user"></i> Hola, <?= htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') ?>
+                    </span>
+
+                    <?php if ($_SESSION["rol"] === "admin"): ?>
+                        <a href="/Kronos/admin/index.php">
+                            <button class="brutal-bag-btn">PANEL</button>
+                        </a>
+                    <?php endif; ?>
+
+                    <a href="/Kronos/admin/cerrar.php">
+                        <button class="brutal-bag-btn" style="border-color: #ff3333; color: #ff3333;">SALIR</button>
+                    </a>
+                <?php else: ?>
+                    <a href="admin/login.php">
+                        <button class="brutal-bag-btn" id="LoginLink">
+                            <i class="fa-regular fa-user"></i> INGRESAR
+                        </button>
+                    </a>
+                <?php endif; ?>
 
                 <button class="brutal-bag-btn cart-button" id="cartToggle">
                     <i class="fa-solid fa-bag-shopping"></i>
@@ -325,7 +342,7 @@ $carpetaImagenes = "assets/img/productos/";
 
                 <?php } ?>
 
-                                <?php foreach ($lista_productos as $producto) {
+                <?php foreach ($lista_productos as $producto) {
 
                     $precioBase = (int)$producto["precio_base"];
                     $precioDescuento = $producto["precio_descuento"];
@@ -363,10 +380,8 @@ $carpetaImagenes = "assets/img/productos/";
                         }
                     }
 
-                    // ---- Datos para la vista rápida (FUERA del if de los talles) ----
                     $descripcion = trim((string)($producto["descripcion"] ?? ""));
-
-                    $peso        = (float)($producto["peso"] ?? 0);
+                    $peso = (float)($producto["peso"] ?? 0);
                     $dimensiones = (float)($producto["dimensiones"] ?? 0);
 
                     $pesoTexto = $peso > 0
@@ -542,7 +557,7 @@ $carpetaImagenes = "assets/img/productos/";
 
         </section>
 
-                <!-- EQUIPO -->
+        <!-- EQUIPO -->
         <?php if (count($equipo) > 0) { ?>
 
         <section id="equipo" class="brutal-crew">
@@ -606,7 +621,7 @@ $carpetaImagenes = "assets/img/productos/";
 
     </main>
 
-        <!-- VISTA RÁPIDA DEL PRODUCTO -->
+    <!-- VISTA RÁPIDA DEL PRODUCTO -->
     <div class="qv-overlay" id="qvOverlay" aria-hidden="true">
 
         <div class="qv-dialog" role="dialog" aria-modal="true" aria-labelledby="qvTitle">
