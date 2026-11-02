@@ -25,6 +25,14 @@
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
+    <a class="admin-tile" href="/Kronos/admin/secciones/configuraciones/">
+        <div>
+            <h2>Configuraciones de Pagina</h2>
+            <p>Gestioná las temporadas disponibles.</p>
+        </div>
+        <span class="admin-tile-cta">ENTRAR →</span>
+    </a>
+
 </section>
 
 <?php include(__DIR__ . "/../../templates/footer.php"); ?>

@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/admin/bd.php");
+require_once(__DIR__ . "/admin/includes/configuracion.php");
 
 function escapar($valor) {
     return htmlspecialchars((string)$valor, ENT_QUOTES, "UTF-8");
@@ -89,6 +90,17 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $logueado = !empty($_SESSION["autenticado"]);
+
+// Configuración editable de la portada (textos e imagen del panel)
+$config = cargarConfiguracion($conexion);
+
+$frasesTicker = lineasConfig($config["ticker_frases"]);
+$frasesFranja = lineasConfig($config["franja_frases"]);
+
+// Si no se subió ninguna imagen desde el panel, se usa la portada de siempre
+$imagenPortada = ($config["hero_imagen"] !== "")
+    ? "assets/img/portada/" . $config["hero_imagen"]
+    : "img/portada.png";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -107,17 +119,17 @@ $logueado = !empty($_SESSION["autenticado"]);
 <body>
 
     <!-- BARRA SUPERIOR -->
-    <div class="brutal-ticker">
-        <div class="ticker-content">
-            <span>✦ BIENVENIDOS A HIVE DIGITAL WORLD</span>
-            <span>✦ COLECCIÓN STREETWEAR Y2K</span>
-            <span>✦ ENVÍOS A TODO EL MUNDO</span>
-            <span>✦ NUEVA GENERACIÓN / NUEVO ESTILO</span>
-            <span>✦ BIENVENIDOS A HIVE DIGITAL WORLD</span>
-            <span>✦ COLECCIÓN STREETWEAR Y2K</span>
-            <span>✦ ENVÍOS A TODO EL MUNDO</span>
+    <?php if (count($frasesTicker) > 0) { ?>
+        <div class="brutal-ticker">
+            <div class="ticker-content">
+                <?php for ($i = 0; $i < 4; $i++) { ?>
+                    <?php foreach ($frasesTicker as $frase) { ?>
+                        <span>✦ <?php echo escapar($frase); ?></span>
+                    <?php } ?>
+                <?php } ?>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 
     <!-- HEADER -->
     <header class="brutal-header">
@@ -215,20 +227,18 @@ $logueado = !empty($_SESSION["autenticado"]);
                 </div>
 
                 <div class="hero-bottom-info">
-                    <div>
-                        <span>COLECCIÓN</span>
-                        <strong>Y2K / 001</strong>
-                    </div>
+                    <?php for ($n = 1; $n <= 3; $n++) {
+                        $etiqueta = $config["hero_info_" . $n . "_etiqueta"];
+                        $valor    = $config["hero_info_" . $n . "_valor"];
 
-                    <div>
-                        <span>ESTILO</span>
-                        <strong>STREET FUTURISTA</strong>
-                    </div>
-
-                    <div>
-                        <span>ESTADO</span>
-                        <strong>DISPONIBLE AHORA</strong>
-                    </div>
+                        if ($etiqueta === "" && $valor === "") {
+                            continue;
+                        } ?>
+                        <div>
+                            <span><?php echo escapar($etiqueta); ?></span>
+                            <strong><?php echo escapar($valor); ?></strong>
+                        </div>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -236,22 +246,22 @@ $logueado = !empty($_SESSION["autenticado"]);
             <div class="hero-image-editorial">
 
                 <div class="hero-image-top">
-                    <span>HIVE® EDITORIAL</span>
-                    <span>001 / 026</span>
+                    <span><?php echo escapar($config["hero_img_sup_izq"]); ?></span>
+                    <span><?php echo escapar($config["hero_img_sup_der"]); ?></span>
                 </div>
 
                 <div class="hero-image-frame">
-                    <img src="img/portada.png" alt="Colección HIVE Y2K">
+                    <img src="<?php echo escapar($imagenPortada); ?>" alt="Portada HIVE">
                 </div>
 
                 <div class="hero-image-bottom">
-                    <span>GENERACIÓN FUTURO</span>
-                    <span>DESDE MMXXVI ✦</span>
+                    <span><?php echo escapar($config["hero_img_inf_izq"]); ?></span>
+                    <span><?php echo escapar($config["hero_img_inf_der"]); ?></span>
                 </div>
 
                 <div class="hero-floating-card">
-                    <span>NUEVO DROP</span>
-                    <strong>ENERGÍA<br>Y2K.</strong>
+                    <span><?php echo escapar($config["hero_card_etiqueta"]); ?></span>
+                    <strong><?php echo nl2br(escapar($config["hero_card_titulo"])); ?></strong>
                     <i class="fa-solid fa-star"></i>
                 </div>
 
@@ -260,15 +270,16 @@ $logueado = !empty($_SESSION["autenticado"]);
         </section>
 
         <!-- BARRA DECORATIVA -->
-        <div class="collection-strip">
-            <span>UNIVERSO HIVE</span>
-            <span>✦</span>
-            <span>NUEVA GENERACIÓN</span>
-            <span>✦</span>
-            <span>CULTURA URBANA</span>
-            <span>✦</span>
-            <span>Y2K PARA SIEMPRE</span>
-        </div>
+        <?php if (count($frasesFranja) > 0) { ?>
+            <div class="collection-strip">
+                <?php foreach ($frasesFranja as $i => $frase) { ?>
+                    <?php if ($i > 0) { ?>
+                        <span>✦</span>
+                    <?php } ?>
+                    <span><?php echo escapar($frase); ?></span>
+                <?php } ?>
+            </div>
+        <?php } ?>
 
         <!-- CATÁLOGO -->
         <section id="catalog" class="brutal-catalog">
