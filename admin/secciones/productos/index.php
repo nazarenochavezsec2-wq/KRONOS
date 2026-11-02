@@ -116,7 +116,9 @@ if ( isset($_POST["accion"]) && $_POST["accion"] === "eliminar" ) {
 
                             <strong>Peso:</strong> <?php echo escapar($producto["peso"]); ?> kg<br> 
 
-                            <strong>Dimensiones:</strong> <?php echo escapar($producto["dimensiones"]); ?> 
+                            <strong>Largo:</strong> <?php echo escapar($producto["largo"]); ?> cm<br> 
+
+                            <strong>Ancho:</strong> <?php echo escapar($producto["ancho"]); ?> cm 
                         </td> 
 
                         <td class="admin-cell-id <?php echo ((int)$producto['stock'] <= 0) ? 'admin-stock-empty' : ''; ?>"> 

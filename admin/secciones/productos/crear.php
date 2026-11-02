@@ -22,7 +22,8 @@ $precio_descuento = (isset($_POST["precio_descuento"]) && $_POST["precio_descuen
 $id_categoria = (isset($_POST["id_categoria"]) && (int)$_POST["id_categoria"] > 0) ? (int)$_POST["id_categoria"] : null; 
 $id_temporada = (isset($_POST["id_temporada"]) && (int)$_POST["id_temporada"] > 0) ? (int)$_POST["id_temporada"] : null; 
 $peso = isset($_POST["peso"]) ? (float)$_POST["peso"] : 0; 
-$dimensiones = isset($_POST["dimensiones"]) ? (float)$_POST["dimensiones"] : 0; 
+$largo = isset($_POST["largo"]) ? (float)$_POST["largo"] : 0; 
+$ancho = isset($_POST["ancho"]) ? (float)$_POST["ancho"] : 0; 
 $estado = isset($_POST["estado"]) ? (int)$_POST["estado"] : 1; 
 $stock = isset($_POST["stock"]) ? (int)$_POST["stock"] : 0; 
 
@@ -33,9 +34,9 @@ move_uploaded_file($imagenTemporal, $rutaDestino);
 
 $sentencia = $conexion->prepare( 
     "INSERT INTO tbl_productos 
-        (id, nombre, `desc`, imagen, precio_base, precio_descuento, id_categoria, id_temporada, peso, dimensiones, estado, stock) 
+        (id, nombre, `desc`, imagen, precio_base, precio_descuento, id_categoria, id_temporada, largo, ancho, peso, estado, stock) 
     VALUES 
-        (NULL, :nombre, :desc, :imagen, :precio_base, :precio_descuento, :id_categoria, :id_temporada, :peso, :dimensiones, :estado, :stock)" 
+        (NULL, :nombre, :desc, :imagen, :precio_base, :precio_descuento, :id_categoria, :id_temporada, :largo, :ancho, :peso, :estado, :stock)" 
 ); 
 
 $sentencia->bindParam(":nombre", $nombre); 
@@ -46,7 +47,8 @@ $sentencia->bindValue(":precio_descuento", $precio_descuento, $precio_descuento 
 $sentencia->bindValue(":id_categoria", $id_categoria, $id_categoria === null ? PDO::PARAM_NULL : PDO::PARAM_INT); 
 $sentencia->bindValue(":id_temporada", $id_temporada, $id_temporada === null ? PDO::PARAM_NULL : PDO::PARAM_INT); 
 $sentencia->bindParam(":peso", $peso); 
-$sentencia->bindParam(":dimensiones", $dimensiones); 
+$sentencia->bindParam(":largo", $largo); 
+$sentencia->bindParam(":ancho", $ancho); 
 $sentencia->bindParam(":estado", $estado); 
 $sentencia->bindParam(":stock", $stock); 
 
@@ -174,7 +176,35 @@ include("../../templates/header.php");
             </div>
 
             <div class="row g-3 mb-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <label for="largo" class="form-label">Largo (cm)</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="largo"
+                        id="largo"
+                        min="0"
+                        step="any"
+                        placeholder="0"
+                        required
+                    />
+                </div>
+
+                <div class="col-md-4">
+                    <label for="ancho" class="form-label">Ancho (cm)</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        name="ancho"
+                        id="ancho"
+                        min="0"
+                        step="any"
+                        placeholder="0"
+                        required
+                    />
+                </div>
+
+                <div class="col-md-4">
                     <label for="peso" class="form-label">Peso (kg)</label>
                     <input
                         type="number"
@@ -184,20 +214,6 @@ include("../../templates/header.php");
                         min="0"
                         step="any"
                         placeholder="0.5"
-                        required
-                    />
-                </div>
-
-                <div class="col-md-6">
-                    <label for="dimensiones" class="form-label">Dimensiones</label>
-                    <input
-                        type="number"
-                        class="form-control"
-                        name="dimensiones"
-                        id="dimensiones"
-                        min="0"
-                        step="any"
-                        placeholder="0"
                         required
                     />
                 </div>
