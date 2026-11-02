@@ -155,20 +155,32 @@ function setupCart() {
 
     checkoutBtn.addEventListener('click', () => {
         if (cart.length === 0) {
-            alert('Your bag is empty.');
+            alert('Tu bolsa de compras está vacía.');
             return;
         }
 
-        let msg = "KRONOS ARCHIVE // ORDER REQUEST:\n\n";
+        // 1. Número limpio y validado para celular de Argentina (Santiago del Estero)
+        const tuNumeroTelefono = "5493855028556"; 
+
+        // 2. Encabezado estético con la identidad Cyberpunk/Y2K de HIVE®
+        let msg = "✳ *HIVE® // NUEVA ORDEN DIGITAL* ✳\n";
+        msg += "=================================\n\n";
+        msg += "¡Hola! Vengo de la tienda online y quiero finalizar mi pedido:\n\n";
+        
         let total = 0;
 
+        // 3. Recorremos tu arreglo real de productos
         cart.forEach(item => {
             let sub = item.price * item.quantity;
             total += sub;
-            msg += `- ${item.title} [Size: ${item.size}] x${item.quantity} = $${sub.toLocaleString()}\n`;
+            msg += `• 🛍️ *${item.title}* \n   [Talle: ${item.size.trim()}] x${item.quantity} ➔ $${sub.toLocaleString('es-AR')}\n\n`;
         });
 
-        msg += `\nTOTAL: $${total.toLocaleString()}`;
-        window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(msg)}`, '_blank');
-    });
+        // 4. Cierre del mensaje con el Total en negrita
+        msg += "=================================\n";
+        msg += `💰 *TOTAL A ABONAR:* $${total.toLocaleString('es-AR')}\n\n`;
+        msg += "⚡ _¿Me podrían facilitar los datos de transferencia para el pago?_";
+
+        // 5. Redirección corregida con la barra (/) y el signo de pesos ($)
+        window.open(`https://wa.me/${tuNumeroTelefono}?text=${encodeURIComponent(msg)}`, '_blank');    });
 }
