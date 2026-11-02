@@ -44,6 +44,14 @@
         <span class="admin-tile-cta">ENTRAR →</span>
     </a>
 
+    <a class="admin-tile" href="/Kronos/admin/secciones/lookbook/">
+        <div>
+            <h2>Lookbook</h2>
+            <p>Subí y ordená las fotos de la galería de looks.</p>
+        </div>
+        <span class="admin-tile-cta">ENTRAR →</span>
+    </a>
+
 </section>
 
 <?php include("templates/footer.php"); ?>

@@ -70,7 +70,19 @@ try {
     $equipo = []; // si la tabla no existe, la sección simplemente no se muestra
 }
 
+// Obtener fotos del lookbook
+$lookbook = [];
+
+try {
+    $sentencia = $conexion->prepare("SELECT id, imagen, titulo FROM lookbook ORDER BY orden ASC, id DESC");
+    $sentencia->execute();
+    $lookbook = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $lookbook = []; // si la tabla no existe, la sección simplemente no se muestra
+}
+
 $carpetaEquipo = "assets/img/equipo/";
+$carpetaLookbook = "assets/img/lookbook/";
 $carpetaImagenes = "assets/img/productos/";
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -119,6 +131,9 @@ $logueado = !empty($_SESSION["autenticado"]);
             <nav class="brutal-nav">
                 <a href="#index">INICIO</a>
                 <a href="#catalog">TIENDA</a>
+                <?php if (count($lookbook) > 0) { ?>
+                    <a href="#lookbook">LOOKBOOK</a>
+                <?php } ?>
                 <a href="#manifesto">NOSOTROS</a>
                 <?php if (count($equipo) > 0) { ?>
                     <a href="#equipo">EQUIPO</a>
@@ -128,11 +143,11 @@ $logueado = !empty($_SESSION["autenticado"]);
             <div class="nav-actions">
 
                 <?php if ($logueado): ?>
-                    <span class="user-badge" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #fff;">
-                        <i class="fa-solid fa-user"></i> Hola, <?= htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') ?>
+                    <span class="user-badge" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--text-main);">
+                        <i class="fa-solid fa-user"></i> Hola, <?= htmlspecialchars($_SESSION["usuario"] ?? "", ENT_QUOTES, 'UTF-8') ?>
                     </span>
 
-                    <?php if ($_SESSION["rol"] === "admin"): ?>
+                    <?php if (($_SESSION["rol"] ?? "") === "admin"): ?>
                         <a href="/Kronos/admin/index.php">
                             <button class="brutal-bag-btn">PANEL</button>
                         </a>
@@ -518,6 +533,71 @@ $logueado = !empty($_SESSION["autenticado"]);
 
         </section>
 
+        <!-- LOOKBOOK -->
+        <?php if (count($lookbook) > 0) { ?>
+
+        <section id="lookbook" class="brutal-look">
+
+            <div class="catalog-intro">
+
+                <div>
+                    <span class="section-label">// 02 — LOOKBOOK</span>
+                    <h2>EL FUTURO<br><span>SE VE ASÍ.</span></h2>
+                </div>
+
+                <div class="catalog-description">
+                    <p>
+                        Fotos, outfits y actitud. Inspirate con los looks
+                        de la colección HIVE.
+                    </p>
+                    <span>TOCÁ UNA FOTO PARA AMPLIARLA ✦</span>
+                </div>
+
+            </div>
+
+            <div class="look-grid">
+
+                <?php foreach ($lookbook as $i => $foto) {
+                    $rutaFoto = $carpetaLookbook . $foto["imagen"];
+                    $leyenda  = trim((string)($foto["titulo"] ?? ""));
+                ?>
+
+                    <button type="button" class="look-item"
+                        data-full="<?php echo escapar($rutaFoto); ?>"
+                        data-caption="<?php echo escapar($leyenda); ?>">
+
+                        <span class="look-frame">
+
+                            <span class="look-bar">
+                                <span>LOOK / <?php echo str_pad($i + 1, 2, "0", STR_PAD_LEFT); ?></span>
+                                <span>HIVE® ✦</span>
+                            </span>
+
+                            <span class="look-photo">
+                                <img
+                                    src="<?php echo escapar($rutaFoto); ?>"
+                                    alt="<?php echo escapar($leyenda !== '' ? $leyenda : 'Look HIVE'); ?>"
+                                    decoding="async"
+                                    <?php echo ($i >= 6) ? 'loading="lazy"' : ''; ?>
+                                >
+                            </span>
+
+                            <?php if ($leyenda !== "") { ?>
+                                <span class="look-caption"><?php echo escapar($leyenda); ?></span>
+                            <?php } ?>
+
+                        </span>
+
+                    </button>
+
+                <?php } ?>
+
+            </div>
+
+        </section>
+
+        <?php } ?>
+
         <!-- MANIFIESTO -->
         <section id="manifesto" class="brutal-manifesto">
 
@@ -530,7 +610,7 @@ $logueado = !empty($_SESSION["autenticado"]);
 
             <div class="manifesto-content">
 
-                <span class="manifesto-tag">// 02 — SOBRE HIVE</span>
+                <span class="manifesto-tag">// 03 — SOBRE HIVE</span>
 
                 <h3>MÁS QUE MODA.<br>UNA ACTITUD TOTALMENTE NUEVA.</h3>
 
@@ -565,7 +645,7 @@ $logueado = !empty($_SESSION["autenticado"]);
             <div class="catalog-intro">
 
                 <div>
-                    <span class="section-label">// 03 — EL EQUIPO</span>
+                    <span class="section-label">// 04 — EL EQUIPO</span>
                     <h2>LAS PERSONAS<br><span>DETRÁS DE HIVE.</span></h2>
                 </div>
 
@@ -620,6 +700,32 @@ $logueado = !empty($_SESSION["autenticado"]);
         <?php } ?>
 
     </main>
+
+    <!-- VISOR DEL LOOKBOOK -->
+    <?php if (count($lookbook) > 0) { ?>
+    <div class="lb-overlay" id="lbOverlay" aria-hidden="true">
+
+        <button type="button" class="lb-close" id="lbClose" aria-label="Cerrar visor">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="Foto anterior">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <figure class="lb-figure">
+            <div class="lb-frame">
+                <img id="lbImg" src="" alt="">
+            </div>
+            <figcaption id="lbCaption"></figcaption>
+        </figure>
+
+        <button type="button" class="lb-nav lb-next" id="lbNext" aria-label="Foto siguiente">
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+    </div>
+    <?php } ?>
 
     <!-- VISTA RÁPIDA DEL PRODUCTO -->
     <div class="qv-overlay" id="qvOverlay" aria-hidden="true">
@@ -764,6 +870,7 @@ $logueado = !empty($_SESSION["autenticado"]);
     <script src="assets/js/script.js"></script>
     <script src="assets/js/filtros.js"></script>
     <script src="assets/js/vista-rapida.js"></script>
+    <script src="assets/js/lookbook.js"></script>
 
 </body>
 </html>

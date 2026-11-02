@@ -1348,3 +1348,22 @@ body.admin-body textarea.form-control {
 .user-actions form {
     margin: 0;
 }
+
+/* Lookbook: miniaturas al elegir fotos */
+.lk-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.lk-previews:empty {
+    display: none;
+}
+
+.lk-previews img {
+    width: 72px;
+    height: 90px;
+    object-fit: cover;
+    border: 1px solid var(--t-border);
+    border-radius: 10px;
+}
