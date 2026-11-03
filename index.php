@@ -113,6 +113,7 @@ $imagenPortada = ($config["hero_imagen"] !== "")
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-carrusel.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -279,6 +280,81 @@ $imagenPortada = ($config["hero_imagen"] !== "")
                     <span><?php echo escapar($frase); ?></span>
                 <?php } ?>
             </div>
+        <?php } ?>
+
+        <!-- CARRUSEL DE NUEVOS INGRESOS (Bootstrap) -->
+        <?php
+        $novedades = array_slice($lista_productos, 0, 5);
+        if (count($novedades) > 0) {
+        ?>
+        <section id="novedades" class="novedades">
+
+            <div class="catalog-intro">
+                <div>
+                    <span class="section-label">// NUEVOS INGRESOS</span>
+                    <h2>LO ÚLTIMO<br><span>EN HIVE®.</span></h2>
+                </div>
+            </div>
+
+            <div id="carruselNovedades" class="carousel slide novedades-carousel" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Nuevos ingresos">
+
+                <div class="carousel-indicators">
+                    <?php foreach ($novedades as $n => $nov) { ?>
+                        <button type="button" data-bs-target="#carruselNovedades" data-bs-slide-to="<?php echo $n; ?>"
+                            class="<?php echo $n === 0 ? 'active' : ''; ?>"
+                            <?php echo $n === 0 ? 'aria-current="true"' : ''; ?>
+                            aria-label="Diapositiva <?php echo $n + 1; ?>"></button>
+                    <?php } ?>
+                </div>
+
+                <div class="carousel-inner">
+                    <?php foreach ($novedades as $n => $nov) {
+                        $pBase = (int)$nov["precio_base"];
+                        $pDesc = $nov["precio_descuento"];
+                        $conDesc = ($pDesc !== null && $pDesc !== "" && (int)$pDesc > 0 && (int)$pDesc < $pBase);
+                        $pFinal = $conDesc ? (int)$pDesc : $pBase;
+                    ?>
+                        <div class="carousel-item <?php echo $n === 0 ? 'active' : ''; ?>">
+                            <div class="novedad-slide">
+
+                                <div class="novedad-foto">
+                                    <img src="<?php echo escapar($carpetaImagenes . $nov['imagen']); ?>"
+                                        alt="<?php echo escapar($nov['nombre']); ?>"
+                                        <?php echo $n > 0 ? 'loading="lazy"' : ''; ?>>
+                                </div>
+
+                                <div class="novedad-info">
+                                    <span class="novedad-num">HIVE® / <?php echo str_pad($nov["id"], 3, "0", STR_PAD_LEFT); ?></span>
+                                    <?php if (!empty($nov["categoria"])) { ?>
+                                        <span class="novedad-cat"><?php echo escapar(mb_strtoupper($nov["categoria"], "UTF-8")); ?></span>
+                                    <?php } ?>
+                                    <h3><?php echo escapar($nov["nombre"]); ?></h3>
+                                    <p class="novedad-precio">
+                                        <?php echo formatoPrecio($pFinal); ?>
+                                        <?php if ($conDesc) { ?>
+                                            <s><?php echo formatoPrecio($pBase); ?></s>
+                                        <?php } ?>
+                                    </p>
+                                    <a href="#catalog" class="hero-cta">VER EN LA COLECCIÓN ↓</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselNovedades" data-bs-slide="prev">
+                    <span class="novedad-flecha" aria-hidden="true">←</span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselNovedades" data-bs-slide="next">
+                    <span class="novedad-flecha" aria-hidden="true">→</span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+
+            </div>
+
+        </section>
         <?php } ?>
 
         <!-- CATÁLOGO -->
@@ -878,6 +954,7 @@ $imagenPortada = ($config["hero_imagen"] !== "")
 
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/filtros.js"></script>
     <script src="assets/js/vista-rapida.js"></script>
