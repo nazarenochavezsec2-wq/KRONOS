@@ -94,9 +94,6 @@ $logueado = !empty($_SESSION["autenticado"]);
 // Configuración editable de la portada (textos e imagen del panel)
 $config = cargarConfiguracion($conexion);
 
-// Número de WhatsApp de contacto (editable desde el panel)
-$whatsapp = preg_replace('/\D+/', '', (string)$config["whatsapp"]);
-
 $frasesTicker = lineasConfig($config["ticker_frases"]);
 $frasesFranja = lineasConfig($config["franja_frases"]);
 
@@ -939,7 +936,7 @@ $imagenPortada = ($config["hero_imagen"] !== "")
                     <h4>SEGUINOS</h4>
                     <a href="#">Instagram ↗</a>
                     <a href="#">TikTok ↗</a>
-                    <a href="https://wa.me/<?php echo escapar($whatsapp); ?>" target="_blank" rel="noopener">WhatsApp ↗</a>
+                    <a href="#">WhatsApp ↗</a>
                 </div>
 
                 <div>
@@ -960,7 +957,6 @@ $imagenPortada = ($config["hero_imagen"] !== "")
 
     </footer>
 
-    <script>window.HIVE_WHATSAPP = "<?php echo escapar($whatsapp); ?>";</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/filtros.js"></script>
