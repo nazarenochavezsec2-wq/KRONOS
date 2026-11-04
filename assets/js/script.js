@@ -160,7 +160,8 @@ function setupCart() {
         }
 
         // 1. Número limpio y validado para celular de Argentina (Santiago del Estero)
-        const tuNumeroTelefono = "5493855028556"; 
+        // El número viene del panel admin (Configuraciones > Contacto); este es el de respaldo
+        const tuNumeroTelefono = window.HIVE_WHATSAPP || "5493855028556";
 
         // 2. Encabezado estético con la identidad Cyberpunk/Y2K de HIVE®
         let msg = "✳ *HIVE® // NUEVA ORDEN DIGITAL* ✳\n";

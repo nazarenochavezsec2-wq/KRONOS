@@ -94,6 +94,9 @@ $logueado = !empty($_SESSION["autenticado"]);
 // Configuración editable de la portada (textos e imagen del panel)
 $config = cargarConfiguracion($conexion);
 
+// Número de WhatsApp de contacto (editable desde el panel)
+$whatsapp = preg_replace('/\D+/', '', (string)$config["whatsapp"]);
+
 $frasesTicker = lineasConfig($config["ticker_frases"]);
 $frasesFranja = lineasConfig($config["franja_frases"]);
 
@@ -296,7 +299,7 @@ $imagenPortada = ($config["hero_imagen"] !== "")
                 </div>
             </div>
 
-            <div id="carruselNovedades" class="carousel slide novedades-carousel" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Nuevos ingresos">
+            <div id="carruselNovedades" class="carousel slide carousel-fade novedades-carousel" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Nuevos ingresos">
 
                 <div class="carousel-indicators">
                     <?php foreach ($novedades as $n => $nov) { ?>
@@ -318,12 +321,15 @@ $imagenPortada = ($config["hero_imagen"] !== "")
                             <div class="novedad-slide">
 
                                 <div class="novedad-foto">
+                                    <span class="novedad-sticker"><?php echo $conDesc ? 'SALE' : 'NUEVO'; ?></span>
+                                    <span class="novedad-contador"><?php echo str_pad($n + 1, 2, "0", STR_PAD_LEFT); ?> / <?php echo str_pad(count($novedades), 2, "0", STR_PAD_LEFT); ?></span>
                                     <img src="<?php echo escapar($carpetaImagenes . $nov['imagen']); ?>"
                                         alt="<?php echo escapar($nov['nombre']); ?>"
                                         <?php echo $n > 0 ? 'loading="lazy"' : ''; ?>>
                                 </div>
 
                                 <div class="novedad-info">
+                                    <span class="novedad-fantasma" aria-hidden="true"><?php echo str_pad($n + 1, 2, "0", STR_PAD_LEFT); ?></span>
                                     <span class="novedad-num">HIVE® / <?php echo str_pad($nov["id"], 3, "0", STR_PAD_LEFT); ?></span>
                                     <?php if (!empty($nov["categoria"])) { ?>
                                         <span class="novedad-cat"><?php echo escapar(mb_strtoupper($nov["categoria"], "UTF-8")); ?></span>
@@ -933,7 +939,7 @@ $imagenPortada = ($config["hero_imagen"] !== "")
                     <h4>SEGUINOS</h4>
                     <a href="#">Instagram ↗</a>
                     <a href="#">TikTok ↗</a>
-                    <a href="#">WhatsApp ↗</a>
+                    <a href="https://wa.me/<?php echo escapar($whatsapp); ?>" target="_blank" rel="noopener">WhatsApp ↗</a>
                 </div>
 
                 <div>
@@ -954,6 +960,7 @@ $imagenPortada = ($config["hero_imagen"] !== "")
 
     </footer>
 
+    <script>window.HIVE_WHATSAPP = "<?php echo escapar($whatsapp); ?>";</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/filtros.js"></script>

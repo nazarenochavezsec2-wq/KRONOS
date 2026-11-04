@@ -29,6 +29,9 @@ function configuracionPorDefecto() {
 
         "hero_card_etiqueta"   => "NUEVO DROP",
         "hero_card_titulo"     => "ENERGÍA\nY2K.",
+
+        // WhatsApp de contacto (solo números, con código de país. Ej: 5493855028556)
+        "whatsapp"             => "5493855028556",
     ];
 }
 
@@ -49,6 +52,7 @@ function configuracionLimites() {
         "hero_img_inf_der"     => 80,
         "hero_card_etiqueta"   => 60,
         "hero_card_titulo"     => 100,
+        "whatsapp"             => 20,
     ];
 }
 

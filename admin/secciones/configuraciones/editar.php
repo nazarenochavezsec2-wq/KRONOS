@@ -47,6 +47,12 @@ if ($_POST) {
         $datos[$clave] = mb_substr($valor, 0, $maximo, "UTF-8"); 
     } 
 
+    // El WhatsApp se guarda solo con números (sin +, espacios ni guiones) 
+    $datos["whatsapp"] = preg_replace('/\D+/', '', $datos["whatsapp"]); 
+    if ($datos["whatsapp"] === "") { 
+        $datos["whatsapp"] = configuracionPorDefecto()["whatsapp"]; 
+    } 
+
     // La imagen actual se lee de la BD (no se confía en el formulario) 
     $imagenAnterior = $config["hero_imagen"]; 
     $imagen = $imagenAnterior; 
@@ -132,6 +138,15 @@ include("../../templates/header.php");
     <div class="card-header">Textos e imagen de la portada</div>
     <div class="card-body">
         <form action="" method="post" enctype="multipart/form-data">
+
+            <!-- CONTACTO -->
+            <h2 class="admin-form-section-title">Contacto (WhatsApp)</h2>
+            <div class="row g-3 mb-3">
+                <?php campoTexto("whatsapp", "Número de WhatsApp", $config, $limites, "col-md-6", "Ej: 5493855028556"); ?>
+                <div class="col-md-6 d-flex align-items-end">
+                    <div class="form-text">Con código de país y sin +, espacios ni guiones (Argentina celular: 549 + código de área + número). A este número llegan los pedidos de "Finalizar compra".</div>
+                </div>
+            </div>
 
             <!-- BARRA SUPERIOR -->
             <h2 class="admin-form-section-title">Barra superior (ticker)</h2>

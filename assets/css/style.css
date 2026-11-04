@@ -2395,104 +2395,250 @@ html.lb-lock body {
 }
 
 .novedades-carousel {
+    position: relative;
+    overflow: hidden;
     border: 2px solid var(--text-main);
-    background: var(--bg-white);
+    background: var(--text-main);
     box-shadow: 10px 10px 0 var(--text-main);
 }
 
 .novedad-slide {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
-    min-height: 520px;
+    height: clamp(460px, 64vh, 600px);
 }
 
+/* ---------- FOTO ---------- */
+
 .novedad-foto {
-    background: var(--bg-blue);
-    border-right: 2px solid var(--text-main);
+    position: relative;
     overflow: hidden;
+    background: var(--bg-blue);
 }
 
 .novedad-foto img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    min-height: 520px;
     object-fit: cover;
+    object-position: center 20%;
     display: block;
+    transform: scale(1);
 }
 
+/* zoom lento mientras la diapositiva está activa */
+.novedades-carousel .carousel-item.active .novedad-foto img {
+    animation: novedadZoom 7s ease-out forwards;
+}
+
+@keyframes novedadZoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+}
+
+.novedad-sticker,
+.novedad-contador {
+    position: absolute;
+    z-index: 2;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.novedad-sticker {
+    top: 22px;
+    left: 22px;
+    padding: 8px 14px;
+    background: var(--bg-white);
+    color: var(--text-main);
+    border: 2px solid var(--text-main);
+    box-shadow: 4px 4px 0 var(--text-main);
+    transform: rotate(-4deg);
+}
+
+.novedad-contador {
+    bottom: 22px;
+    left: 22px;
+    padding: 6px 12px;
+    background: rgba(23, 23, 23, 0.75);
+    color: #fff;
+    backdrop-filter: blur(4px);
+}
+
+/* ---------- INFO ---------- */
+
 .novedad-info {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 18px;
-    padding: 50px 70px;
+    padding: 50px 70px 110px;
+    color: #fff;
 }
 
-.novedad-num,
-.novedad-cat {
+/* número gigante de fondo */
+.novedad-fantasma {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(120px, 16vw, 240px);
+    font-weight: 900;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+    user-select: none;
+}
+
+.novedad-info > * {
+    position: relative;
+    z-index: 1;
+}
+
+.novedad-info > .novedad-fantasma {
+    position: absolute;
+    z-index: 0;
+}
+
+.novedad-num {
     font-family: 'Space Mono', monospace;
     font-size: 11px;
     font-weight: 700;
-    color: var(--text-muted);
+    letter-spacing: 2px;
+    color: var(--blue-light);
 }
 
 .novedad-cat {
-    border: 1px solid var(--text-main);
-    color: var(--text-main);
-    padding: 4px 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 30px;
+    color: #fff;
 }
 
 .novedad-info h3 {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(26px, 3.2vw, 44px);
-    line-height: 1.1;
+    font-size: clamp(28px, 3.4vw, 50px);
+    line-height: 1.05;
     letter-spacing: -2px;
+    text-transform: uppercase;
+    background: var(--chrome);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .novedad-precio {
     font-family: 'Space Mono', monospace;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
+    color: #fff;
 }
 
 .novedad-precio s {
     font-size: 15px;
-    color: var(--text-muted);
-    margin-left: 8px;
+    margin-left: 10px;
+    color: var(--pink);
 }
+
+.novedad-info .hero-cta {
+    margin-top: 8px;
+    background: #fff;
+    color: var(--text-main);
+    box-shadow: none;
+}
+
+.novedad-info .hero-cta:hover {
+    background: var(--silver);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+/* texto que sube al cambiar de diapositiva */
+.novedades-carousel .carousel-item.active .novedad-info > :not(.novedad-fantasma) {
+    animation: novedadSube 0.7s ease both;
+}
+.novedades-carousel .carousel-item.active .novedad-info > :nth-child(3) { animation-delay: 0.08s; }
+.novedades-carousel .carousel-item.active .novedad-info > :nth-child(4) { animation-delay: 0.16s; }
+.novedades-carousel .carousel-item.active .novedad-info > :nth-child(5) { animation-delay: 0.24s; }
+.novedades-carousel .carousel-item.active .novedad-info > :nth-child(6) { animation-delay: 0.32s; }
+
+@keyframes novedadSube {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- INDICADORES (barritas) ---------- */
+
+.novedades-carousel .carousel-indicators {
+    left: auto;
+    right: 0;
+    bottom: 48px;
+    width: 47.6%;
+    margin: 0;
+    padding: 0 70px;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.novedades-carousel .carousel-indicators [data-bs-target] {
+    width: 38px;
+    height: 4px;
+    margin: 0;
+    border: 0;
+    background-color: #fff;
+    opacity: 0.3;
+    transition: var(--transition);
+}
+
+.novedades-carousel .carousel-indicators .active {
+    width: 64px;
+    opacity: 1;
+}
+
+/* ---------- FLECHAS ---------- */
 
 .novedades-carousel .carousel-control-prev,
 .novedades-carousel .carousel-control-next {
-    width: 70px;
+    top: auto;
+    bottom: 30px;
+    width: auto;
     opacity: 1;
 }
+
+.novedades-carousel .carousel-control-next { right: 40px; }
+.novedades-carousel .carousel-control-prev { right: 100px; left: auto; }
 
 .novedad-flecha {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 46px;
-    height: 46px;
-    background: var(--bg-white);
-    border: 2px solid var(--text-main);
-    color: var(--text-main);
-    font-size: 22px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
     transition: var(--transition);
 }
 
 .novedades-carousel .carousel-control-prev:hover .novedad-flecha,
 .novedades-carousel .carousel-control-next:hover .novedad-flecha {
-    background: var(--text-main);
-    color: var(--bg-white);
+    background: #fff;
+    color: var(--text-main);
+    border-color: #fff;
 }
 
-.novedades-carousel .carousel-indicators [data-bs-target] {
-    background-color: var(--text-main);
-    width: 28px;
-    height: 4px;
-    border: 0;
-}
+/* ---------- CELULAR ---------- */
 
 @media (max-width: 900px) {
     .novedades {
@@ -2501,19 +2647,29 @@ html.lb-lock body {
 
     .novedad-slide {
         grid-template-columns: 1fr;
+        height: auto;
     }
 
     .novedad-foto {
-        border-right: 0;
-        border-bottom: 2px solid var(--text-main);
-    }
-
-    .novedad-foto img {
-        min-height: 320px;
-        height: 320px;
+        height: 360px;
     }
 
     .novedad-info {
-        padding: 30px 28px 60px;
+        padding: 34px 26px 100px;
     }
+
+    .novedad-fantasma {
+        font-size: 120px;
+        right: 14px;
+        top: 0;
+    }
+
+    .novedades-carousel .carousel-indicators {
+        width: 100%;
+        padding: 0 26px;
+        bottom: 46px;
+    }
+
+    .novedades-carousel .carousel-control-next { right: 20px; }
+    .novedades-carousel .carousel-control-prev { right: 78px; }
 }
